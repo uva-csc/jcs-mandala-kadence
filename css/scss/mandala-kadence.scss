@@ -1,0 +1,72 @@
+@import 'media-queries.scss';
+
+#masthead {
+  position: fixed;
+  height: 75px;
+  width: 100%;
+
+}  /** End of #masthead */
+
+#primary {
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0;
+    margin: 75px 0;
+    padding: 0 0;
+    max-width: 100vw;
+    width: 100vw;
+  }
+
+  .content-container #main {
+    flex-basis: 80%;
+    flex-grow: 4;
+    align-self: flex-start;
+    margin: 0 0;
+    padding: 0 0;
+  }
+
+  .content-container #secondary {
+    flex-basis: 20%;
+    flex-grow: 1;
+    align-self: flex-start;
+    margin: 0 0;
+    padding: 0 0;
+  }
+  .content-container #secondary .sidebar-inner-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+} /** End of #primary **/
+
+div#basicAndBrowse {
+  display: flex;
+  margin-left: 2rem;
+}
+
+#browseSearchPortal {
+  .c-MainSearchToggle--group {
+    position: absolute;
+    right: 0 !important;
+    top: 30px;
+  }
+
+  .c-MainSearchToggle--group label .icon,
+  .c-MainSearchToggle--group label svg {
+    background-color: transparent;
+  }
+
+  .c-MainSearchToggle--group label.active .icon,
+  .c-MainSearchToggle--group label.active svg {
+    color: #fff;
+    fill: #fff;
+  }
+} /** End of #browseSearchPortal **/
+
+
+.sidebar-inner-wrap .l-content__rightsidebar {
+  margin: 0 0;
+}

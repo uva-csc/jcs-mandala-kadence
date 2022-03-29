@@ -1,0 +1,99 @@
+@media screen and (min-width: 769px) {
+    .transparent-header #masthead {
+        position: fixed;
+        height: 75px;
+    }
+
+    #masthead .site-main-header-wrap .site-header-row-container-inner>.site-container {
+        padding: 0;
+    }
+
+    #primary > .content-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 0;
+        margin: 75px 0;
+        padding: 0 0;
+        max-width: 100vw;
+        width: 100vw;
+    }
+
+    #primary > .content-container #main {
+        flex-basis: 80%;
+        flex-grow: 4;
+        align-self: flex-start;
+        margin: 0 0;
+        padding: 0 0;
+    }
+
+    #primary > .content-container #secondary {
+        flex-basis: 20%;
+        flex-grow: 1;
+        align-self: flex-start;
+        margin: 0 0;
+        padding: 0 0;
+    }
+
+    #primary > .content-container #secondary .sidebar-inner-wrap {
+        display: flex;
+        flex-direction: column;
+    }
+
+    div#basicAndBrowse {
+        display: flex;
+        margin-left: 2rem;
+    }
+
+    #browseSearchPortal .c-MainSearchToggle--group {
+        position: absolute;
+        right: 0 !important;
+        top: 30px;
+    }
+
+    #browseSearchPortal .c-MainSearchToggle--group label .icon,
+    #browseSearchPortal .c-MainSearchToggle--group label svg {
+        background-color: transparent;
+    }
+    #browseSearchPortal .c-MainSearchToggle--group label.active .icon,
+    #browseSearchPortal .c-MainSearchToggle--group label.active svg {
+        color: #fff;
+        fill: #fff;
+    }
+
+
+    .sidebar-inner-wrap .l-content__rightsidebar {
+        margin: 0 0;
+    }
+
+} /** End of screen (min-width: 1025px) **/
+
+
+/** Header Styles **/
+.site #masthead * {
+    color: #555;
+    background-color: #eee; /*#6fabf3  #97b7df; /* #6f9ed8; */
+}
+
+.site #masthead .c-MainSearchToggle--group label {
+    background-color: #fff;
+}
+
+.site #masthead .c-MainSearchToggle--group .c-MainSearchToggle--button.active .icon {
+    color: #eee;
+    background-color: transparent;
+}
+
+.site #masthead .c-MainSearchToggle--group #advanced-site-settings {
+    background-color: #eee;
+    border: none;
+    font-size: 100%;
+}
+
+/** Homepage styles **/
+.explore-btn .kt-btn-inner-text {
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 80%);
+}
+
