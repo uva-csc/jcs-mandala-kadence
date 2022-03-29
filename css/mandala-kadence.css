@@ -1,1 +1,107 @@
-#masthead{position:fixed;height:75px;width:100%}#primary{}#primary .content-container{display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:flex-start;align-items:stretch;gap:0;margin:0;padding:0 0;max-width:100vw;width:100vw}#primary .content-container #main{flex-basis:80%;flex-grow:4;align-self:flex-start;margin:0 0;padding:0 0}#primary .content-container #main .entry-content-wrap{padding:0}#primary .content-container #secondary{flex-basis:20%;flex-grow:1;align-self:flex-start;margin:0 0;padding:0 0}#primary .content-container #secondary .sidebar-inner-wrap{display:flex;flex-direction:column}div#basicAndBrowse{display:flex;margin-left:2rem}div#basicAndBrowse #basicSearchPortal{position:absolute;right:165px !important;top:30px}div#basicAndBrowse #browseSearchPortal{position:absolute;right:0 !important;top:30px}div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label .icon,div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label svg{background-color:transparent}div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label.active .icon,div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label.active svg{color:#fff;fill:#fff}div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings{font-size:22px;width:50px}div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings svg{margin-top:-4px}#advancedSearchPortal .l-content__rightsidebar{margin:0 0}#advancedSearchPortal .l-content__rightsidebar .header-label-count.back-to-results{font-size:1.2rem;font-weight:600;line-height:2;letter-spacing:0.075rem;margin:0 0.35rem;padding:0 1.75rem;border-radius:25px}#advancedSearchPortal .l-content__rightsidebar .header-label-count.back-to-results a{color:#fff}
+#masthead {
+  position: fixed;
+  height: 75px;
+  width: 100%;
+}
+
+/** End of #masthead */
+#primary {
+  /** End of .content-container **/
+}
+#primary .content-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 0;
+  margin: 0;
+  padding: 0 0;
+  max-width: 100vw;
+  width: 100vw;
+  /** End of #main */
+  /** End of #secondary **/
+}
+#primary .content-container #main {
+  flex-basis: 80%;
+  flex-grow: 4;
+  align-self: flex-start;
+  margin: 0 0;
+  padding: 0 0;
+}
+#primary .content-container #main .entry-content-wrap {
+  padding: 0;
+}
+#primary .content-container #secondary {
+  flex-basis: 20%;
+  flex-grow: 1;
+  align-self: flex-start;
+  margin: 0 0;
+  padding: 0 0;
+}
+#primary .content-container #secondary .sidebar-inner-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+/** End of #primary flex layout **/
+div#basicAndBrowse {
+  display: flex;
+  margin-left: 2rem;
+  /** End of #browseSearchPortal **/
+}
+div#basicAndBrowse #basicSearchPortal {
+  position: absolute;
+  right: 165px !important;
+  top: 30px;
+}
+div#basicAndBrowse #browseSearchPortal {
+  position: absolute;
+  right: 0 !important;
+  top: 30px;
+}
+div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label .icon,
+div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label svg {
+  background-color: transparent;
+}
+div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label.active .icon,
+div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label.active svg {
+  color: #fff;
+  fill: #fff;
+}
+div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings {
+  font-size: 22px;
+  width: 50px;
+}
+div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings svg {
+  margin-top: -4px;
+}
+
+/** End of #basicAndBrowse **/
+/** Mandala Adv Search Sidebar styles */
+#advancedSearchPortal .l-content__rightsidebar {
+  margin: 0 0;
+}
+#advancedSearchPortal .l-content__rightsidebar .header-label-count.back-to-results {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 2;
+  letter-spacing: 0.075rem;
+  margin: 0 0.35rem;
+  padding: 0 1.75rem;
+  border-radius: 25px;
+}
+#advancedSearchPortal .l-content__rightsidebar .header-label-count.back-to-results a {
+  color: #fff;
+}
+
+/** Hide primary menu when subsite menu is shown **/
+#mandala-subsite-menu ~ * {
+  display: none;
+}
+
+#subsite-title {
+  display: none;
+}
+
+/*# sourceMappingURL=mandala-kadence.css.map */

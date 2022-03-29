@@ -105,25 +105,15 @@ div#basicAndBrowse {
         color: #fff;
       }
     }
-    /*
-    .l-column__search .search-column-reset-filters a {
-      font-size: 1.2rem;
-      font-weight: 600;
-      line-height: 2;
-      letter-spacing: .075rem;
-      margin: 0 .35rem;
-      padding: 0 1.75rem;
-      background-color: #a27f1c;
-      color: #fff;
-      border: 4px double #fff;
-      border-radius: 1.8rem;
-      opacity: .9;
-      transition: all .2s;
-      text-transform: uppercase;
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
-
-     */
   }
+
+}
+
+/** Hide primary menu when subsite menu is shown **/
+#mandala-subsite-menu ~ * {
+  display: none;
+}
+
+#subsite-title {
+  display: none;
 }
