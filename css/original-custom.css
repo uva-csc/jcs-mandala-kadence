@@ -1,4 +1,8 @@
-@media screen and (min-width: 769px) {
+/*
+    Original Custom Styles added in site through Custom CSS plugin
+    FOR REFERENCE ONLY. DO NOT ADD
+*/
+@media screen and (min-width: 1025px) {
     .transparent-header #masthead {
         position: fixed;
         height: 75px;
@@ -96,4 +100,3 @@
 .explore-btn .kt-btn-inner-text {
     text-shadow: 1px 1px 2px rgb(0 0 0 / 80%);
 }
-
