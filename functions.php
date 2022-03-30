@@ -105,7 +105,7 @@ class MandalaKadence {
 		$subsite = $this->get_ancestor_value($myid, 'subsite_menu');
 		if (!empty($subsite)) {
 			$menu_args = array(
-				'menu'            => 31,
+				'menu'            => $subsite,
 				'menu_class'      => 'menu',
 				'container'       => 'div',
 				'container_id'    => 'subsite-menu',
