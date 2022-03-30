@@ -43,6 +43,19 @@ class MandalaKadence {
 		 	false,'1.0','all');
 		wp_enqueue_script( 'mandala-kadence-scripts', get_stylesheet_directory_uri() . '/js/mandala-kadence.js',
 			array ( 'jquery' ), 1.0, true);
+
+		// Add custom styles from /css/custom folder (just files ending in *.css)
+		$custom_folder = get_stylesheet_directory() . '/css/custom';
+		$files = array_diff(scandir($custom_folder), array('.', '..'));
+		$cssfiles = array_filter($files, function($fnm) {
+			return str_ends_with($fnm, '.css');
+		});
+
+		foreach($cssfiles as $n => $cssfile) {
+			// error_log(get_stylesheet_directory_uri() . "/css/custom/$cssfile");
+			wp_enqueue_style( 'mandala-kadence-custom-styles-' . $n,  get_stylesheet_directory_uri() . "/css/custom/$cssfile",
+				false,'1.0','all');
+		}
 	}
 	public function subsite_bname($bname) {
 		global $post;
@@ -68,7 +81,12 @@ class MandalaKadence {
 			$subsite_class = array_merge(array('subsite'), $subsite_class); # add generic "subsite" class to body as well
 			return $subsite_class;
 		}
-		return [];
+		// Add "subsite" body class to any page with subsite title defined
+		$subsite_title = $this->get_ancestor_value($myid, 'subsite_title');
+		if (!empty($subsite_title)) {
+			return array('subsite');
+		}
+		return array();
 	}
 
 	public function subsite_title() {
