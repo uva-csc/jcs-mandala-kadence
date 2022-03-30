@@ -14,10 +14,10 @@
         if (hash.length < 3)  {
             return;
         }
-        // Otherwise, go through each primary menu item and if one matches, then add class to highlight it
-        $.each($('#primary-menu .menu-item a'), (n, ael) => {
+        // Otherwise, go through each primary and subsite menu items and if one matches, then add class to highlight it
+        $.each($('#primary-menu .menu-item a, #subsite-menu .menu-item a'), (n, ael) => {
             const mylink = $(ael).attr('href');
-            if (mylink == hash) {
+            if (mylink === hash) {
                 $('.current-menu-item').removeClass('current-menu-item')
                 $(ael).parent().addClass('current-menu-item')
             }
