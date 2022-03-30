@@ -1,6 +1,7 @@
 # Mandala Kadence
 A child theme of Kadence for Mandala-based sites and their subsites
 
+## 
 ## Styles
 CSS styles are written in SCSS locally using the WP-SCSS plugin which compiles and saves the css, which will also 
 be included in the git repo to be used by production sites.

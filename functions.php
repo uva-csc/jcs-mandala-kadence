@@ -1,6 +1,31 @@
 <?php
 
+/**
+ * Mandala Kadence Theme Class : A child theme of Kadence for use with Mandala content
+ *
+ * This theme allows for custom styling of Kadence to work with Mandala content. The stylesheets are written in
+ * SCSS but must be processed into CSS which is also stored in this repo. In the init() function the theme only
+ * adds the CSS file. Only generic styles for adapting any Mandala content to the Kadence theme should be placed
+ * in this theme’s css. Custom CSS for subsites or specific sites should use the subsite class and custom CSS.
+ *
+ * This theme also allows for subsites. This requires the use of custom metadata for pages. This is best implemented
+ * through the plugin Advanced Custom Fields. The necessary fields are:
+ *
+ *      subsite_nav : The ID number of the custom menu to use
+ *      subsite_title : The Title for the subsite to display in the header in place of the blogname
+ *      subsite_class : A special class to put in the <body> element to identify pages of a subsite.
+ *
+ * Any page *or children of a page* that has these fields set will display the specific menu and title in the header
+ * and attach the subsite class to the body along with the generic class "subsite".
+ *
+ * @author  Than Grove
+ * @package  Mandala Kadence
+ * @version  1.0
+ */
 class MandalaKadence {
+	/**
+	 * The construct function adds actions and filters for
+	 */
 	function __construct() {
 		// Custom Actions
 		add_action('after_setup_theme', array($this, 'init'));
@@ -29,12 +54,18 @@ class MandalaKadence {
 		return $bname;
 	}
 
+	/**
+	 * This function is called by the filter for "body_class". It adds specific classes to the body for subsites
+	 *
+	 * @return array|string[]
+	 */
 	public function subsite_class() {
 		global $post;
 		$myid = get_the_ID();
 		$subsite_class = $this->get_ancestor_value($myid, 'subsite_class');
 		if (!empty($subsite_class)) {
 			$subsite_class = explode(' ', $subsite_class);
+			$subsite_class = array_merge(array('subsite'), $subsite_class); # add generic "subsite" class to body as well
 			return $subsite_class;
 		}
 		return [];
