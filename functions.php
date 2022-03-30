@@ -9,6 +9,7 @@ class MandalaKadence {
 
 		// Custom Filters
 		add_filter('body_class', array($this, 'subsite_class'));
+		add_filter('pre_option_blogname', array($this, 'subsite_bname'));
 	}
 
 	function init() {
@@ -17,6 +18,15 @@ class MandalaKadence {
 		 	false,'1.0','all');
 		wp_enqueue_script( 'mandala-kadence-scripts', get_stylesheet_directory_uri() . '/js/mandala-kadence.js',
 			array ( 'jquery' ), 1.0, true);
+	}
+	public function subsite_bname($bname) {
+		global $post;
+		$myid = get_the_ID();
+		$subsite_title = $this->get_ancestor_value($myid, 'subsite_title');
+		if (!empty($subsite_title)) {
+			return $subsite_title;
+		}
+		return $bname;
 	}
 
 	public function subsite_class() {
