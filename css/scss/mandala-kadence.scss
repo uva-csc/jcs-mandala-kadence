@@ -62,14 +62,16 @@ div#basicAndBrowse {
   #browseSearchPortal {
     position: absolute;
     right: 0 !important;
+    top: 11px;
 
     .c-MainSearchToggle--group {
-      label, svg {
+      label, button {
         height: 60px;
       }
       label .icon,
       label svg {
         background-color: transparent;
+        top: 0.75rem;
       }
 
       label.active .icon,
