@@ -1,6 +1,6 @@
 #masthead {
   position: fixed;
-  height: 75px;
+  height: 60px;
   width: 100%;
 }
 
@@ -53,16 +53,20 @@ div#basicAndBrowse {
 div#basicAndBrowse #basicSearchPortal {
   position: absolute;
   right: 165px !important;
-  top: 30px;
+  top: 11px;
 }
 div#basicAndBrowse #browseSearchPortal {
   position: absolute;
   right: 0 !important;
-  top: 30px;
+  top: 11px;
+}
+div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label, div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group button {
+  height: 60px;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label .icon,
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label svg {
   background-color: transparent;
+  top: 0.75rem;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label.active .icon,
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label.active svg {

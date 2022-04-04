@@ -2,7 +2,7 @@
 
 #masthead {
   position: fixed;
-  height: 75px;
+  height: 60px;
   width: 100%;
 }  /** End of #masthead */
 
@@ -56,17 +56,21 @@ div#basicAndBrowse {
   #basicSearchPortal {
     position: absolute;
     right: 165px !important;
-    top: 30px;
+    top: 11px;
   }
   #browseSearchPortal {
     position: absolute;
     right: 0 !important;
-    top: 30px;
+    top: 11px;
 
     .c-MainSearchToggle--group {
+      label, button {
+        height: 60px;
+      }
       label .icon,
       label svg {
         background-color: transparent;
+        top: 0.75rem;
       }
 
       label.active .icon,
