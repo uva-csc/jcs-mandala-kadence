@@ -54,14 +54,15 @@ div#basicAndBrowse {
 div#basicAndBrowse #basicSearchPortal {
   position: absolute;
   right: 165px !important;
-  top: 11px;
+  top: 5px;
 }
 div#basicAndBrowse #browseSearchPortal {
   position: absolute;
   right: 0 !important;
+  top: -1px;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label, div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group button {
-  height: 60px;
+  height: 61px;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label .icon,
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label svg {
