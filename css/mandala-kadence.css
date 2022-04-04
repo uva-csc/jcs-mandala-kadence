@@ -59,7 +59,6 @@ div#basicAndBrowse #basicSearchPortal {
 div#basicAndBrowse #browseSearchPortal {
   position: absolute;
   right: 0 !important;
-  top: 11px;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label, div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group button {
   height: 60px;
