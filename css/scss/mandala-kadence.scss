@@ -2,7 +2,7 @@
 
 #masthead {
   position: fixed;
-  height: 75px;
+  height: 60px;
   width: 100%;
 }  /** End of #masthead */
 
@@ -52,18 +52,21 @@
 div#basicAndBrowse {
   display: flex;
   margin-left: 2rem;
+  height: 60px;
 
   #basicSearchPortal {
     position: absolute;
     right: 165px !important;
-    top: 30px;
+    top: 11px;
   }
   #browseSearchPortal {
     position: absolute;
     right: 0 !important;
-    top: 30px;
 
     .c-MainSearchToggle--group {
+      label, svg {
+        height: 60px;
+      }
       label .icon,
       label svg {
         background-color: transparent;
@@ -82,6 +85,13 @@ div#basicAndBrowse {
           margin-top: -4px;
         }
       }
+    }
+
+    #advanced-search-tree-toggle .icon {
+      top: 0.1rem;
+    }
+    main-search-tree-toggle svg {
+      top: -1rem;
     }
   }  /** End of #browseSearchPortal **/
 } /** End of #basicAndBrowse **/

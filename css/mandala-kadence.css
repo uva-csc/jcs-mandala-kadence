@@ -1,6 +1,6 @@
 #masthead {
   position: fixed;
-  height: 75px;
+  height: 60px;
   width: 100%;
 }
 
@@ -48,17 +48,20 @@
 div#basicAndBrowse {
   display: flex;
   margin-left: 2rem;
+  height: 60px;
   /** End of #browseSearchPortal **/
 }
 div#basicAndBrowse #basicSearchPortal {
   position: absolute;
   right: 165px !important;
-  top: 30px;
+  top: 11px;
 }
 div#basicAndBrowse #browseSearchPortal {
   position: absolute;
   right: 0 !important;
-  top: 30px;
+}
+div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label, div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group svg {
+  height: 60px;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label .icon,
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label svg {
@@ -75,6 +78,12 @@ div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings svg {
   margin-top: -4px;
+}
+div#basicAndBrowse #browseSearchPortal #advanced-search-tree-toggle .icon {
+  top: 0.1rem;
+}
+div#basicAndBrowse #browseSearchPortal main-search-tree-toggle svg {
+  top: -1rem;
 }
 
 /** End of #basicAndBrowse **/
