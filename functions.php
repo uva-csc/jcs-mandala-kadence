@@ -76,17 +76,16 @@ class MandalaKadence {
 		global $post;
 		$myid = get_the_ID();
 		$subsite_class = $this->get_ancestor_value($myid, 'subsite_class');
+		$subsite_title = $this->get_ancestor_value($myid, 'subsite_title');
+		$extra_classes = ['mandala'];
 		if (!empty($subsite_class)) {
 			$subsite_class = explode(' ', $subsite_class);
-			$subsite_class = array_merge(array('subsite'), $subsite_class); # add generic "subsite" class to body as well
-			return $subsite_class;
+			$extra_classes[] = 'subsite';
+			$extra_classes = array_merge($extra_classes, $subsite_class); # add generic "subsite" class to body as well
+		} else  if (!empty($subsite_title)) {
+			$extra_classes[] = 'subsite';
 		}
-		// Add "subsite" body class to any page with subsite title defined
-		$subsite_title = $this->get_ancestor_value($myid, 'subsite_title');
-		if (!empty($subsite_title)) {
-			return array('subsite');
-		}
-		return array();
+		return $extra_classes;
 	}
 
 	public function subsite_title() {
