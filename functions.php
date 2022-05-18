@@ -30,7 +30,8 @@ class MandalaKadence {
 		// Custom Actions
 		add_action('after_setup_theme', array($this, 'init'));
 		add_action('get_template_part_template-parts/header/navigation', array($this, 'subsite_nav'));
-		add_action('kadence_site_branding', array($this, 'subsite_title'));
+		add_action('before_kadence_logo_output', array($this, 'subsite_logo'));
+		add_action('kadence_footer_navigation', array($this, 'subsite_footer'));
 
 		// Custom Filters
 		add_filter('body_class', array($this, 'subsite_class'));
@@ -57,6 +58,25 @@ class MandalaKadence {
 				false,'1.0','all');
 		}
 	}
+
+	public function subsite_logo() {
+		global $post;
+		$myid = get_the_ID();
+		$sublogo = $this->get_ancestor_value($myid, 'subsite_logo');
+		if (!empty($sublogo)) {
+			error_log( json_encode($sublogo) );
+			$logo = wp_get_attachment_image( $sublogo, 'full', true, array('class'    => 'subsite-logo'));
+			echo $logo;
+		}
+	}
+
+	/**
+	 * This function replaces the site title (i.e. blog name) with the subsite title
+	 *
+	 * @param $bname
+	 *
+	 * @return mixed
+	 */
 	public function subsite_bname($bname) {
 		global $post;
 		$myid = get_the_ID();
@@ -88,6 +108,7 @@ class MandalaKadence {
 		return $extra_classes;
 	}
 
+	/* Deprecated. See subsite_bname() function
 	public function subsite_title() {
 		global $post;
 		$myid = get_the_ID();
@@ -96,6 +117,7 @@ class MandalaKadence {
 			echo '<div id="subsite-title"><span class="subsite-title">' . $subsite_title . '</span></div>';
 		}
 	}
+	 */
 
 	public function subsite_nav() {
 		global $post;
@@ -123,6 +145,26 @@ class MandalaKadence {
 							role="navigation" aria-label="Primary Navigation">';
 			$suffels   = '</nav></div>';
 			echo "$prefels $menu $suffels";
+		}
+	}
+
+	public function subsite_footer() {
+		global $post;
+		// Custom fields for subsite existence and subsite alt text.
+		$myid = get_the_ID();
+		$sbsfmenu = $this->get_ancestor_value($myid, 'subsite_footer_menu');
+		if (!empty($sbsfmenu)) {
+			$menu_args   = array(
+				'menu'            => $sbsfmenu,
+				'menu_class'      => 'menu',
+				'container'       => 'div',
+				'container_id'    => 'subsite-menu',
+				'container_class' => 'subsite-menu primary-menu-container header-menu-container',
+				'theme_location'  => 'main_center',
+				'echo'            => false,
+			);
+			$footer_menu = wp_nav_menu( $menu_args );
+			echo "<nav id=\"subsite-footer-menu\">$footer_menu</nav>";
 		}
 	}
 

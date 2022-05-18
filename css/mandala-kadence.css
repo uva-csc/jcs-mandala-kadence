@@ -115,4 +115,40 @@ div#basicAndBrowse #browseSearchPortal main-search-tree-toggle svg {
   display: none;
 }
 
+.site-branding a.brand img.subsite-logo+img {
+  display: none;
+}
+
+.footer-widget-area #subsite-footer-menu {
+  display: flex;
+  position: relative;
+  top: 35px;
+  margin-top: -40px;
+}
+
+.footer-widget-area #subsite-footer-menu #subsite-menu {
+  display: flex;
+}
+
+.footer-widget-area #subsite-footer-menu #subsite-menu .menu {
+  display: flex;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.footer-widget-area #subsite-footer-menu #subsite-menu .menu > li {
+  list-style-type: none;
+}
+
+.footer-widget-area #subsite-footer-menu #subsite-menu .menu > li > a {
+  padding-left: calc(0.6em / 2);
+  padding-right: calc(0.6em / 2);
+  color: #515151;
+  white-space: nowrap;
+}
+
+.site-footer-wrap #subsite-footer-menu+#footer-navigation {
+  display: none;
+}
+
 /*# sourceMappingURL=mandala-kadence.css.map */
