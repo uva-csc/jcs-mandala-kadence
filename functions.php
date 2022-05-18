@@ -30,8 +30,8 @@ class MandalaKadence {
 		// Custom Actions
 		add_action('after_setup_theme', array($this, 'init'));
 		add_action('get_template_part_template-parts/header/navigation', array($this, 'subsite_nav'));
-		// add_action('before_kadence_logo_output', array($this, 'subsite_logo'));
-		// add_action('kadence_footer_navigation', array($this, 'subsite_footer'));
+		add_action('before_kadence_logo_output', array($this, 'subsite_logo'));
+		add_action('kadence_footer_navigation', array($this, 'subsite_footer'));
 
 		// Custom Filters
 		add_filter('body_class', array($this, 'subsite_class'));
