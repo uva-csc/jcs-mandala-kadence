@@ -1,0 +1,5 @@
+// Override Kadence Grid column settings for Mandala galleries
+.c-view__wrapper.gallery {
+  grid-template-columns: unset;
+  grid-gap: unset;
+}

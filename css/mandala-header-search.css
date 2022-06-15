@@ -115,9 +115,4 @@ div#basicAndBrowse #browseSearchPortal main-search-tree-toggle svg {
   display: none;
 }
 
-.c-view__wrapper.gallery {
-  grid-template-columns: unset;
-  grid-gap: unset;
-}
-
-/*# sourceMappingURL=mandala-kadence.css.map */
+/*# sourceMappingURL=mandala-header-search.css.map */

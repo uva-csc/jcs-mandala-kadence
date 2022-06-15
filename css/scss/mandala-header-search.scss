@@ -1,0 +1,130 @@
+
+#masthead {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+}  /** End of #masthead */
+
+#primary {
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 0 0;
+    max-width: 100vw;
+    width: 100vw;
+
+    #main {
+      flex-basis: 80%;
+      flex-grow: 4;
+      align-self: flex-start;
+      margin: 0 0;
+      padding: 0 0;
+
+      .entry-content-wrap {
+        padding: 0;
+      }
+    } /** End of #main */
+
+    #secondary {
+      flex-basis: 20%;
+      flex-grow: 1;
+      align-self: flex-start;
+      margin: 0 0;
+      padding: 0 0;
+
+      .sidebar-inner-wrap {
+        display: flex;
+        flex-direction: column;
+      }
+    } /** End of #secondary **/
+
+  } /** End of .content-container **/
+
+} /** End of #primary flex layout **/
+
+
+div#basicAndBrowse {
+  display: flex;
+  margin-left: 2rem;
+  height: 60px;
+
+  #basicSearchPortal {
+    position: absolute;
+    right: 165px !important;
+    top: 5px;
+  }
+  #browseSearchPortal {
+    position: absolute;
+    right: 0 !important;
+    top: -1px;
+
+    .c-MainSearchToggle--group {
+      label, button {
+        height: 61px;
+      }
+      label .icon,
+      label svg {
+        background-color: transparent;
+        top: 0.75rem;
+      }
+
+      label.active .icon,
+      label.active svg {
+        color: #fff;
+        fill: #fff;
+      }
+      #advanced-site-settings {
+        font-size: 22px;
+        width: 50px;
+
+        svg {
+          margin-top: -4px;
+        }
+      }
+    }
+
+    #advanced-search-tree-toggle .icon {
+      top: 0.1rem;
+    }
+    main-search-tree-toggle svg {
+      top: -1rem;
+    }
+  }  /** End of #browseSearchPortal **/
+} /** End of #basicAndBrowse **/
+
+
+/** Mandala Adv Search Sidebar styles */
+#advancedSearchPortal
+{
+  .l-content__rightsidebar {
+    margin: 0 0;
+
+    .header-label-count.back-to-results {
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 2;
+      letter-spacing: .075rem;
+      margin: 0 .35rem;
+      padding: 0 1.75rem;
+      border-radius: 25px;
+      a {
+        color: #fff;
+      }
+    }
+  }
+
+}
+
+/** Hide primary menu when subsite menu is shown **/
+#mandala-subsite-menu ~ * {
+  display: none;
+}
+
+#subsite-title {
+  display: none;
+}
