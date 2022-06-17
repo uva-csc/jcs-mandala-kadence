@@ -120,4 +120,9 @@ div#basicAndBrowse #browseSearchPortal main-search-tree-toggle svg {
   grid-gap: unset;
 }
 
+.l-column__related.c-collection__metadata li, .l-column__related.c-collection__metadata a {
+  font-size: 15px;
+  text-indent: -0.75rem;
+}
+
 /*# sourceMappingURL=mandala-kadence.css.map */

@@ -3,3 +3,10 @@
   grid-template-columns: unset;
   grid-gap: unset;
 }
+
+.l-column__related.c-collection__metadata {
+  li, a {
+    font-size:15px;
+    text-indent: -0.75rem;
+  }
+}
