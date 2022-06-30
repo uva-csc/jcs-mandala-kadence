@@ -29,6 +29,7 @@ class MandalaKadence {
 	function __construct() {
 		// Custom Actions
 		add_action('after_setup_theme', array($this, 'init'));
+		add_action('kadence_header', array($this, 'add_custom_data'));
 		add_action('get_template_part_template-parts/header/navigation', array($this, 'subsite_nav'));
 		add_action('before_kadence_logo_output', array($this, 'subsite_logo'));
 		add_action('kadence_footer_navigation', array($this, 'subsite_footer'));
@@ -59,12 +60,21 @@ class MandalaKadence {
 		}
 	}
 
+	/**
+	 * This function adds custom data as a JSON object to the DOM to be used by an embedded React standalone
+	 */
+	public function add_custom_data() {
+		$options = get_option( 'mandala_plugin_options' );
+		$sbval = !empty($options['default_sidebar']) ? $options['default_sidebar'] * 1 : '';
+		echo '<script type="application/json" id="mandala_data">{ "sidebar": ' . $sbval . ' }</script>';
+	}
+
 	public function subsite_logo() {
 		global $post;
 		$myid = get_the_ID();
 		$sublogo = $this->get_ancestor_value($myid, 'subsite_logo');
 		if (!empty($sublogo)) {
-			error_log( json_encode($sublogo) );
+			// error_log( json_encode($sublogo) );
 			$logo = wp_get_attachment_image( $sublogo, 'full', true, array('class'    => 'subsite-logo'));
 			echo $logo;
 		}
