@@ -65,8 +65,10 @@ class MandalaKadence {
 	 */
 	public function add_custom_data() {
 		$options = get_option( 'mandala_plugin_options' );
-		$sbval = !empty($options['default_sidebar']) ? $options['default_sidebar'] * 1 : '';
-		echo '<script type="application/json" id="mandala_data">{ "sidebar": ' . $sbval . ' }</script>';
+		$sbval = !empty($options['default_sidebar']) ? $options['default_sidebar'] * 1 : False;
+		if ($sbval) {
+			echo '<script type="application/json" id="mandala_data">{ "sidebar": ' . $sbval . ' }</script>';
+		}
 	}
 
 	public function subsite_logo() {
