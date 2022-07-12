@@ -26,16 +26,24 @@ class MandalaKadence {
 	/**
 	 * The construct function adds actions and filters for
 	 */
+    public $main_title = '';
+
 	function __construct() {
 		// Custom Actions
 		add_action('after_setup_theme', array($this, 'init'));
+        add_action('wp_head', array($this, 'subsite_add_css'));
+        add_action('kadence_top_header', array($this, 'subsite_back_link'));
 		add_action('kadence_header', array($this, 'add_custom_data'));
 		add_action('get_template_part_template-parts/header/navigation', array($this, 'subsite_nav'));
 		add_action('before_kadence_logo_output', array($this, 'subsite_logo'));
 		add_action('kadence_footer_navigation', array($this, 'subsite_footer'));
+        //add_action('kadence_hero_header', array($this, 'subsite_title'));
 
 		// Custom Filters
+        add_filter('pre_get_document_title', array($this, 'subsite_title_clean'));
 		add_filter('body_class', array($this, 'subsite_class'));
+        // Get main site title before overwriting in the following filter
+        $this->main_title = get_bloginfo();
 		add_filter('pre_option_blogname', array($this, 'subsite_bname'));
 	}
 
@@ -71,10 +79,53 @@ class MandalaKadence {
 		}
 	}
 
+    /**
+     * Adds a CSS script tag to the head of a subsite page that contains the subsite CSS
+     * Each rule in the CSS field and each selector within each rule is appended with the
+     * body class for the subsite, e.g .my-subsite div.foo, .my-subsite div.bar {...}, etc.
+     */
+    public function subsite_add_css() {
+        $subinf = $this->get_subsite_info();
+        if (!empty($subinf['css'])) {
+            $subid = $subinf['class'] ?: 'subsite' . get_the_ID();
+            $css_lines = preg_split("/\n*}\n*/", $subinf['css']);
+            $css_lines = array_map(function($item) use ($subid) {
+                if (empty($item)) { return ""; }
+                $item = trim($item);
+                list($selector, $rule) = explode('{', $item, 2);
+                $selpts = explode(',', $selector);
+                $selpts = array_map(function($sel) use ($subid) {
+                    $sel = trim($sel);
+                    if (empty($sel)) { return ""; }
+                    return ".$subid $sel";
+                }, $selpts);
+                return implode(",\n", $selpts) . " {\n" . $rule;
+            }, $css_lines);
+            $css_lines = implode("\n}\n", $css_lines);
+            // error_log("Subsite CSS ($subid):\n$css_lines");
+            echo '<style id="' . $subid . '-styles">' . $css_lines . '</style>';
+        }
+    }
+
+    /**
+     * Displays area above header with link back to main site
+     */
+    public function subsite_back_link() {
+        $subs = $this->get_subsite_info();
+        if ($this->is_subsite()) {
+            $site_logo = get_custom_logo();
+            $home_url = get_home_url();
+            echo '<div class="subsite-back">' . $site_logo . ' <a class="back-link" href="' . $home_url . '">' .
+                    $this->main_title . '</a></div>';
+        }
+    }
+
+    /**
+     * Display the subsite logo
+     * CSS is defined to hide site logo if it falls after subsite logo
+     */
 	public function subsite_logo() {
-		global $post;
-		$myid = get_the_ID();
-		$sublogo = $this->get_ancestor_value($myid, 'subsite_logo');
+		$sublogo = $this->get_subsite_info('logo');
 		if (!empty($sublogo)) {
 			// error_log( json_encode($sublogo) );
 			$logo = wp_get_attachment_image( $sublogo, 'full', true, array('class'    => 'subsite-logo'));
@@ -82,17 +133,29 @@ class MandalaKadence {
 		}
 	}
 
+    /**
+     * Called as a filter for pre_get_document_title. Serves to strip tags from the title
+     * that is inserted into the HTML head meta tag
+     *
+     * @param $title
+     * @return string
+     */
+    public function subsite_title_clean($title) {
+        $subsite_title =  $this->get_subsite_info('title');
+        if ($subsite_title) {
+            return strip_tags($subsite_title);
+        }
+    }
+
 	/**
-	 * This function replaces the site title (i.e. blog name) with the subsite title
+	 * Replaces the site title (i.e. blog name) with the subsite title
 	 *
 	 * @param $bname
 	 *
 	 * @return mixed
 	 */
 	public function subsite_bname($bname) {
-		global $post;
-		$myid = get_the_ID();
-		$subsite_title = $this->get_ancestor_value($myid, 'subsite_title');
+        $subsite_title =  $this->get_subsite_info('title');
 		if (!empty($subsite_title)) {
 			return $subsite_title;
 		}
@@ -100,42 +163,26 @@ class MandalaKadence {
 	}
 
 	/**
-	 * This function is called by the filter for "body_class". It adds specific classes to the body for subsites
+	 * Called by the filter for "body_class". Adds specific classes to the body for subsites.
 	 *
 	 * @return array|string[]
 	 */
 	public function subsite_class() {
-		global $post;
-		$myid = get_the_ID();
-		$subsite_class = $this->get_ancestor_value($myid, 'subsite_class');
-		$subsite_title = $this->get_ancestor_value($myid, 'subsite_title');
-		$extra_classes = ['mandala'];
-		if (!empty($subsite_class)) {
-			$subsite_class = explode(' ', $subsite_class);
-			$extra_classes[] = 'subsite';
-			$extra_classes = array_merge($extra_classes, $subsite_class); # add generic "subsite" class to body as well
-		} else  if (!empty($subsite_title)) {
-			$extra_classes[] = 'subsite';
-		}
-		return $extra_classes;
+        if ($this->is_subsite()) {
+            $extra_classes = array('subsite'); # start list with generic "subsite" class for body
+            $subsite_class = $this->get_subsite_info('class') ?: 'subsite' . get_the_ID(); # add unique ss id
+            $subsite_class = explode(' ', $subsite_class);  # if user has space delimited classes in field
+            $extra_classes = array_merge($extra_classes, $subsite_class);
+            return $extra_classes;
+        }
+        return array();
 	}
 
-	/* Deprecated. See subsite_bname() function
-	public function subsite_title() {
-		global $post;
-		$myid = get_the_ID();
-		$subsite_title = $this->get_ancestor_value($myid, 'subsite_title');
-		if (!empty($subsite_title)) {
-			echo '<div id="subsite-title"><span class="subsite-title">' . $subsite_title . '</span></div>';
-		}
-	}
-	 */
-
+    /**
+     * Show a particular navigation menu for a subsite
+     */
 	public function subsite_nav() {
-		global $post;
-		// Custom fields for subsite existence and subsite alt text.
-		$myid = get_the_ID();
-		$subsite = $this->get_ancestor_value($myid, 'subsite_menu');
+        $subsite =  $this->get_subsite_info('menu');
 		if (!empty($subsite)) {
 			$menu_args = array(
 				'menu'            => $subsite,
@@ -160,11 +207,12 @@ class MandalaKadence {
 		}
 	}
 
+    /**
+     * Display a custom footer menu for a subsite
+     */
 	public function subsite_footer() {
-		global $post;
 		// Custom fields for subsite existence and subsite alt text.
-		$myid = get_the_ID();
-		$sbsfmenu = $this->get_ancestor_value($myid, 'subsite_footer_menu');
+        $sbsfmenu =  $this->get_subsite_info('footer_menu');
 		if (!empty($sbsfmenu)) {
 			$menu_args   = array(
 				'menu'            => $sbsfmenu,
@@ -180,6 +228,48 @@ class MandalaKadence {
 		}
 	}
 
+    /**
+     * Gets all subsite info as an associative array or gets the value for a particular field
+     * @param string $field
+     * @return array|mixed
+     */
+    public function get_subsite_info($field='all') {
+        $myid = get_the_ID();
+        $ssinfo = array(
+            'title' => $this->get_ancestor_value($myid, 'subsite_title'),
+            'logo' => $this->get_ancestor_value($myid, 'subsite_logo'),
+            'class' => $this->get_ancestor_value($myid, 'subsite_class'),
+            'menu' => $this->get_ancestor_value($myid, 'subsite_menu'),
+            'footer_menu' => $this->get_ancestor_value($myid, 'subsite_footer_menu'),
+            'css' => $this->get_ancestor_value($myid, 'subsite_css'),
+        );
+        if (in_array($field, array_keys($ssinfo))) {
+            return $ssinfo[$field];
+        }
+        return $ssinfo;
+    }
+
+    /**
+     * Determine if a page is part of a subsite based on whether _any_ of the subsite variables are set
+     * @return bool
+     */
+    public function is_subsite() {
+        $ssinfo = $this->get_subsite_info();
+        foreach($ssinfo as $k => $v) {
+            if (!empty($v)) {
+                return true;  // If a single subsite value is not empty then it is considered a subsite
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns custom setting value by name if it is set on this page or any of its ancestors
+     *
+     * @param $pid
+     * @param $varname
+     * @return false|mixed
+     */
 	public function get_ancestor_value($pid, $varname) {
 		if (empty($pid) || !is_numeric($pid)) { return false; }
 		$val = get_post_meta($pid, $varname, true);
@@ -191,7 +281,6 @@ class MandalaKadence {
 		}
 		return $val;
 	}
-
 }
 
 $mandalakadence = new MandalaKadence();
