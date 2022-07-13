@@ -1,0 +1,21 @@
+.subsite {
+  .subsite-back {
+    height: 26px;
+    img.custom-logo {
+      display: inline-block;
+      height: 20px;
+      width: 20px;
+      top: -1px;
+      padding: 0 3px 3px;
+    }
+    .back-link {
+      font-size: 80%;
+    }
+  }
+
+  .subsite-logo + .custom-logo {
+    display: none !important;
+  }
+
+}
+
