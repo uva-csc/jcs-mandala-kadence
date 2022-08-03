@@ -45,6 +45,7 @@ class MandalaKadence {
         // Get main site title before overwriting in the following filter
         $this->main_title = get_bloginfo();
 		add_filter('pre_option_blogname', array($this, 'subsite_bname'));
+        add_filter('kadence_logo_url', array($this, 'subsite_url'));
 	}
 
 	function init() {
@@ -116,7 +117,7 @@ class MandalaKadence {
             $site_logo = get_custom_logo();
             $home_url = get_home_url();
             echo '<div class="subsite-back">' . $site_logo . ' <a class="back-link" href="' . $home_url . '">' .
-                    $this->main_title . '</a></div>';
+                    $this->main_title . '</a> </div>';
         }
     }
 
@@ -161,6 +162,14 @@ class MandalaKadence {
 		}
 		return $bname;
 	}
+
+    public function subsite_url($homeurl) {
+        if ($this->is_subsite()) {
+            $myid = get_the_ID();
+            $homeurl = $this->get_subsite_home($myid);
+        }
+        return $homeurl;
+    }
 
 	/**
 	 * Called by the filter for "body_class". Adds specific classes to the body for subsites.
@@ -281,6 +290,20 @@ class MandalaKadence {
 		}
 		return $val;
 	}
+
+    /**
+     * Get a subsite's home page url
+     *
+     * @param $pid
+     * @return false|string
+     */
+    public function get_subsite_home($pid) {
+        $thepost = get_post($pid);
+        while (!empty($thepost->post_parent)) {
+            $thepost = $thepost->post_parent;
+        }
+        return get_home_url() . '/' . get_page_uri($thepost);
+    }
 }
 
 $mandalakadence = new MandalaKadence();
