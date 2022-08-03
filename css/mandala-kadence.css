@@ -1,3 +1,8 @@
+/* Hide the #primary div until we check for and possibly load Mandala content */
+body.loading #primary {
+  display: none;
+}
+
 .subsite .subsite-back {
   height: 26px;
 }

@@ -1,0 +1,5 @@
+
+/* Hide the #primary div until we check for and possibly load Mandala content */
+body.loading #primary {
+  display: none;
+}

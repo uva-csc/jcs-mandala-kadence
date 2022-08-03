@@ -178,13 +178,13 @@ class MandalaKadence {
 	 */
 	public function subsite_class() {
         if ($this->is_subsite()) {
-            $extra_classes = array('subsite'); # start list with generic "subsite" class for body
+            $extra_classes = array('subsite', 'loading'); # start list with generic "subsite" class for body
             $subsite_class = $this->get_subsite_info('class') ?: 'subsite' . get_the_ID(); # add unique ss id
             $subsite_class = explode(' ', $subsite_class);  # if user has space delimited classes in field
             $extra_classes = array_merge($extra_classes, $subsite_class);
             return $extra_classes;
         }
-        return array();
+        return array('loading');
 	}
 
     /**

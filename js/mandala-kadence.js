@@ -3,6 +3,7 @@
     $(document).ready(() => {
         // Highlight Active Hash Links in Primary Menu
         HashMenuActiveLink();  // In case page is loaded from link call at beginning
+        CheckForHash();
         // Otherwise, add event listener for hash changes
         window.addEventListener("hashchange", HashMenuActiveLink, false);
     });
@@ -22,5 +23,14 @@
                 $(ael).parent().addClass('current-menu-item')
             }
         });
+    };
+
+    // Checks whether there is a hash and insures that the mandala class is set for the body
+    const CheckForHash = () => {
+        const hsh = window.location.hash;
+        if (hsh?.length > 2 && !$('body').hasClass('mandala')) {
+            $('body').addClass('mandala');
+        }
+        $('body').removeClass('loading');
     };
 })(jQuery);
