@@ -1,5 +1,11 @@
 
-/* Hide the #primary div until we check for and possibly load Mandala content */
-body.loading #primary {
-  display: none;
+/* Hide the #primary div until we check for and possibly load Mandala content  , footer#colophon */
+body.loading {
+  #primary {
+    display: none;
+  }
+
+  footer#colophon {
+    background: unset;
+  }
 }
