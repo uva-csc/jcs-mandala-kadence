@@ -10,3 +10,25 @@
     text-indent: -0.75rem;
   }
 }
+
+div.mandala-message {
+  width: 100%;
+  /* Colors taken from BS: https://getbootstrap.com/docs/4.5/utilities/colors/ */
+  background-color: #17a2b8;   /* Info color */
+
+  &.success {
+    background-color: #28a745!important;
+  }
+  &.warning {
+    background-color: #ffc107!important;
+  }
+  &.danger {
+    background-color: #dc3545!important;
+  }
+
+  h5 {
+    margin: 0 auto;
+    padding: 0.5rem;
+    width: fit-content;
+  }
+}
