@@ -31,8 +31,6 @@ class MandalaKadence {
 	function __construct() {
 		// Custom Actions
 		add_action('after_setup_theme', array($this, 'init'));
-        add_action('admin_menu', array($this, 'mandala_admin_menu'));
-        add_action('admin_init', array($this, 'mandala_theme_settings'));
         add_action('wp_head', array($this, 'subsite_add_css'));
         add_action('kadence_top_header', array($this, 'subsite_back_link'));
 		add_action('kadence_header', array($this, 'add_custom_data'));
@@ -70,38 +68,6 @@ class MandalaKadence {
 				false,'1.0','all');
 		}
 	}
-
-    public function mandala_admin_menu() {
-        add_options_page(
-            __( 'Mandala Kadence Theme Settings', 'textdomain' ),
-            __( 'Mandala Theme', 'textdomain' ),
-            'manage_options',
-            'mandala_theme',
-            array(
-                $this,
-                'mandala_theme_settings'
-            )
-        );
-    }
-    public function mandala_theme_settings() {
-        echo "<h2>Mandala settings in own page</h2>";
-        add_settings_field(
-            'mandala_test',
-            'Mandala Test Field',
-            array($this, 'test_field'),
-            'mandala_theme');
-    }
-
-    public function test_field() {
-        echo "<p> I am a test field</p>";
-    }
-
-    public function my_mandala_settings($arg) {
-        echo "<h2>Mandala settings in class</h2>";
-        echo '<p>Mandala id: ' . $arg['id'] . '</p>';             // id: eg_setting_section
-        echo '<p>Mandala title: ' . $arg['title'] . '</p>';       // title: Example settings section in reading
-        echo '<p>callback: ' . $arg['callback'] . '</p>'; // callback: eg_setting_section_callback_function
-    }
 
 	/**
 	 * This function adds custom data as a JSON object to the DOM to be used by an embedded React standalone
