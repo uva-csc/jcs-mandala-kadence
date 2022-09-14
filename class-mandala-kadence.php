@@ -304,10 +304,18 @@ class MandalaKadence {
      */
     public function get_subsite_home($pid) {
         $thepost = get_post($pid);
-        while (!empty($thepost->post_parent)) {
-            $thepost = $thepost->post_parent;
+        $blog_home_id = get_option( 'blog_homepage' );
+        if ($thepost->post_type == 'page') {
+            while (!empty($thepost->post_parent)) {
+                $thepost = $thepost->post_parent;
+            }
+            return get_home_url() . '/' . get_page_uri($thepost);
+        } elseif ($thepost->post_type == 'post' && !empty($blog_home_id)) {
+            $thepost = get_post($blog_home_id);
+            return get_home_url() . '/' . get_page_uri($thepost);
+        } else {
+            return get_home_url();
         }
-        return get_home_url() . '/' . get_page_uri($thepost);
     }
 }
 
