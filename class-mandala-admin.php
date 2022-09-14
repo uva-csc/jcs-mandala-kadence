@@ -3,7 +3,6 @@
 class MandalaAdmin {
     function __construct()
     {
-        error_log("In mandala admin");
         // Custom Actions
         add_action('admin_menu', array($this, 'mandala_admin_menu'));
         add_action('admin_init', array($this, 'mandala_theme_settings_fields'));
@@ -42,11 +41,11 @@ class MandalaAdmin {
 
     public function mandala_theme_settings_fields() {
 
-        // I created variables to make the things clearer
+        // Slug and option group labels
         $page_slug = 'mandala_theme';
         $option_group = 'mandala_theme_settings';
 
-        // 1. create section
+        // Add a single section (for now)
         add_settings_section(
             'mandala_theme_settings_id', // section ID
             '', // title (optional)
@@ -54,19 +53,20 @@ class MandalaAdmin {
             $page_slug
         );
 
-        // 2. register fields
-        register_setting( $option_group, 'slider_on', array($this, 'mandala_sanitize_checkbox') );
-        register_setting( $option_group, 'num_of_slides', 'absint' );
+        // Register fields
+        register_setting( $option_group, 'blog_homepage', 'absint' );
+        // register_setting( $option_group, 'num_of_slides', 'absint' );
 
-        // 3. add fields
+        // Add fields
         add_settings_field(
-            'slider_on',
-            'Display slider',
-            array($this, 'mandala_checkbox'), // function to print the field
+            'blog_homepage',
+            'Blog Homepage',
+            array($this, 'mandala_blog_home'), // function to print the field
             $page_slug,
             'mandala_theme_settings_id' // section ID
         );
 
+        /*
         add_settings_field(
             'num_of_slides',
             'Number of slides',
@@ -79,33 +79,34 @@ class MandalaAdmin {
                 'name' => 'num_of_slides' // pass any custom parameters
             )
         );
+        */
 
     }
 
-
-// custom callback function to print field HTML
-    function mandala_number( $args ){
-        printf(
-            '<input type="number" id="%s" name="%s" value="%d" />',
-            $args[ 'name' ],
-            $args[ 'name' ],
-            get_option( $args[ 'name' ], 2 ) // 2 is the default number of slides
-        );
-    }
-// custom callback function to print checkbox field HTML
-    function mandala_checkbox( $args ) {
-        $value = get_option( 'slider_on' );
+    // Custom Field for selecting blog home page for banner
+    function mandala_blog_home( $args ) {
+        $value = get_option( 'blog_homepage' );
+        $allpages = get_pages();
         ?>
-        <label>
-            <input type="checkbox" name="slider_on" <?php checked( $value, 'yes' ) ?> /> Yes
-        </label>
-        <?php
+            <select name="blog_homepage">
+                <?php foreach($allpages as $apage): ?>
+                    <option value="<?php echo $apage->ID; ?>>"
+                            <?php selected($value, $apage->ID); ?>
+                    ><?php echo $apage->post_title; ?></option>
+                <?php endforeach; ?>
+            </select>
+       <?php
+
+        if (!empty($value)) {
+            $currpg = get_post($value);
+            if (!empty($currpg)) {
+                ?>
+                    <div><a href="/<?php echo $currpg->post_name; ?>" target="_blank">Go to page</a></div>
+                <?php
+            }
+        }
     }
 
-// custom sanitization function for a checkbox field
-    function mandala_sanitize_checkbox( $value ) {
-        return 'on' === $value ? 'yes' : 'no';
-    }
 }
 
 $mandala_admin = new MandalaAdmin();
