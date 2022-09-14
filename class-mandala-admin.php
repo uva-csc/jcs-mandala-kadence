@@ -55,7 +55,6 @@ class MandalaAdmin {
 
         // Register fields
         register_setting( $option_group, 'blog_homepage', 'absint' );
-        // register_setting( $option_group, 'num_of_slides', 'absint' );
 
         // Add fields
         add_settings_field(
@@ -66,21 +65,6 @@ class MandalaAdmin {
             'mandala_theme_settings_id' // section ID
         );
 
-        /*
-        add_settings_field(
-            'num_of_slides',
-            'Number of slides',
-            array($this, 'mandala_number'),
-            $page_slug,
-            'mandala_theme_settings_id',
-            array(
-                'label_for' => 'num_of_slides',
-                'class' => 'hello', // for <tr> element
-                'name' => 'num_of_slides' // pass any custom parameters
-            )
-        );
-        */
-
     }
 
     // Custom Field for selecting blog home page for banner
@@ -89,6 +73,7 @@ class MandalaAdmin {
         $allpages = get_pages();
         ?>
             <select name="blog_homepage">
+                <option value="0">None</option>
                 <?php foreach($allpages as $apage): ?>
                     <option value="<?php echo $apage->ID; ?>>"
                             <?php selected($value, $apage->ID); ?>
@@ -101,7 +86,11 @@ class MandalaAdmin {
             $currpg = get_post($value);
             if (!empty($currpg)) {
                 ?>
-                    <div><a href="/<?php echo $currpg->post_name; ?>" target="_blank">Go to page</a></div>
+                    <div class="mt">
+                        <a href="/<?php echo $currpg->post_name; ?>" target="_blank">
+                            Go to <?php echo $currpg->post_title; ?>
+                        </a>
+                    </div>
                 <?php
             }
         }

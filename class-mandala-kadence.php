@@ -288,7 +288,9 @@ class MandalaKadence {
 				$val = $this->get_ancestor_value($thepost->post_parent, $varname);
 			} elseif ($thepost->post_type == 'post') {
                 $blog_home_id = get_option( 'blog_homepage' );
-                $val = $this->get_ancestor_value($blog_home_id, $varname);
+                if (!empty($blog_home_id)) {
+                    $val = $this->get_ancestor_value($blog_home_id, $varname);
+                }
             }
 		}
 		return $val;

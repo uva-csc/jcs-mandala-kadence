@@ -6,6 +6,10 @@ body.loading footer#colophon {
   background: unset;
 }
 
+.mt {
+  margin-top: 0.5rem;
+}
+
 .subsite .subsite-back {
   height: 26px;
 }
