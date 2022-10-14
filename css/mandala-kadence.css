@@ -6,6 +6,10 @@ body.loading footer#colophon {
   background: unset;
 }
 
+.mt {
+  margin-top: 0.5rem;
+}
+
 .subsite .subsite-back {
   height: 26px;
 }
@@ -151,6 +155,27 @@ div#basicAndBrowse #browseSearchPortal main-search-tree-toggle svg {
 .l-column__related.c-collection__metadata li, .l-column__related.c-collection__metadata a {
   font-size: 15px;
   text-indent: -0.75rem;
+}
+
+div.mandala-message {
+  width: 100%;
+  /* Colors taken from BS: https://getbootstrap.com/docs/4.5/utilities/colors/ */
+  background-color: #17a2b8;
+  /* Info color */
+}
+div.mandala-message.success {
+  background-color: #28a745 !important;
+}
+div.mandala-message.warning {
+  background-color: #ffc107 !important;
+}
+div.mandala-message.danger {
+  background-color: #dc3545 !important;
+}
+div.mandala-message h5 {
+  margin: 0 auto;
+  padding: 0.5rem;
+  width: fit-content;
 }
 
 /*# sourceMappingURL=mandala-kadence.css.map */
