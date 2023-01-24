@@ -1,3 +1,49 @@
+/** Convert header menu to dropdown when below 1300px **/
+@media screen and (max-width: 1300px) {
+  #main-header nav.main-navigation {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    background-image: url("https://thl-new.local/wp-content/themes/mandala-kadence/images/hamburger.svg");
+    background-repeat: no-repeat;
+  }
+  #main-header nav.main-navigation:hover > div > ul {
+    display: block;
+    margin-top: 40px;
+  }
+  #main-header nav.main-navigation ul {
+    display: none;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  #main-header nav.main-navigation ul li.current-menu-item > a {
+    background-color: #3f49b1;
+    color: #eeeeee !important;
+  }
+  #main-header nav.main-navigation ul li.current-menu-item > a:after {
+    display: none;
+  }
+  #main-header nav.main-navigation ul li ul.sub-menu {
+    display: none;
+    padding: 0;
+    margin: 0;
+  }
+  #main-header nav.main-navigation ul li:hover ul.sub-menu {
+    display: block;
+  }
+  #main-header nav.main-navigation ul li:hover ul.sub-menu li {
+    border-bottom: thin solid #aaa;
+  }
+  #main-header nav.main-navigation ul li:hover ul.sub-menu li a {
+    color: black;
+  }
+  #main-header nav.main-navigation ul li:hover ul.sub-menu li a:hover {
+    color: white;
+  }
+}
 /* Hide the #primary div until we check for and possibly load Mandala content  , footer#colophon */
 body.loading #primary {
   display: none;
