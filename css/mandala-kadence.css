@@ -1,4 +1,4 @@
-/** Convert header menu to dropdown when below 1300px **/
+/** Convert header menu to dropdown when below 1420px **/
 @media screen and (max-width: 1420px) {
   #main-header nav.main-navigation {
     position: relative;
