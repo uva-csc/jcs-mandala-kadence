@@ -92,7 +92,7 @@ $screen-xl-max: 5000px;
 }
 
 /** Convert header menu to dropdown when below 1420px **/
-@media screen and (max-width: 1420px) {
+@media only screen and (max-width: 1450px) {
   body #main-header nav.main-navigation {
     position: relative;
     display: inline-block;
