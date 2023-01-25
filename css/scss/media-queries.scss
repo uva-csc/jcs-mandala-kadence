@@ -59,7 +59,7 @@
   }
 }
 @media only screen and (min-width: 1000px) {
-  #mobile-sidebar-tab {
+  #mobile-sidebar-buttons {
     display: none;
   }
 }
@@ -69,25 +69,13 @@
     display: none;
   }
 
-  #mobile-sidebar-tab {
-    position: absolute;
-    right: 0;
-    top: 70px;
-    height: 40px;
-    width: 40px;
-    border: 3px double #777;
-    z-index: 1000;
-    color: white;
-    padding: 0.3rem 0.5rem 0.7rem 1rem;
-    font-size: 130%;
-    border-right: none;
-    border-radius: 10px 0 0 10px;
-  }
 
-  .logged-in #mobile-sidebar-tab {
+  .logged-in #mobile-sidebar-buttons {
     top: 100px;
   }
 }
+
+
 
 
 

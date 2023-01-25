@@ -50,7 +50,7 @@
   }
 }
 @media only screen and (min-width: 1000px) {
-  #mobile-sidebar-tab {
+  #mobile-sidebar-buttons {
     display: none;
   }
 }
@@ -59,22 +59,7 @@
     display: none;
   }
 
-  #mobile-sidebar-tab {
-    position: absolute;
-    right: 0;
-    top: 70px;
-    height: 40px;
-    width: 40px;
-    border: 3px double #777;
-    z-index: 1000;
-    color: white;
-    padding: 0.3rem 0.5rem 0.7rem 1rem;
-    font-size: 130%;
-    border-right: none;
-    border-radius: 10px 0 0 10px;
-  }
-
-  .logged-in #mobile-sidebar-tab {
+  .logged-in #mobile-sidebar-buttons {
     top: 100px;
   }
 }
@@ -112,6 +97,9 @@ body.loading footer#colophon {
   height: 60px;
   width: 100%;
 }
+#masthead #mobile-header #basicSearchPortal {
+  margin-left: 100px;
+}
 
 /** End of #masthead */
 #primary {
@@ -143,6 +131,20 @@ body.loading footer#colophon {
 }
 #primary .content-container #main .entry-content-wrap {
   padding: 0;
+}
+#primary .content-container #mobile-sidebar-buttons {
+  position: absolute;
+  right: 50px;
+  top: 0px;
+  height: 60px;
+  z-index: 200;
+}
+#primary .content-container #mobile-sidebar-buttons > * {
+  height: 60px !important;
+}
+#primary .content-container #mobile-sidebar-buttons label {
+  padding-top: 14px;
+  height: unset;
 }
 #primary .content-container #secondary {
   flex-basis: 25%;
@@ -190,6 +192,7 @@ div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label.active s
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings {
   font-size: 16px;
   width: 50px;
+  border: none;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings svg {
   margin-top: -4px;

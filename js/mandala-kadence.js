@@ -5,7 +5,7 @@
         HashMenuActiveLink();  // In case page is loaded from link call at beginning
         CheckForHash();
         ActivateMobileSearchTab();
-        $(window).on("resize", ActivateMobileSearchTab);
+        $(window).on("resize", mandalaWindowResize);
         // Otherwise, add event listener for hash changes
         window.addEventListener("hashchange", HashMenuActiveLink, false);
     });
@@ -37,17 +37,41 @@
         $('body').removeClass('loading');
     };
 
+    /**
+     * Moves to banner for mobile sizes
+     */
+    const mandalaWindowResize = () => {
+        const srchport = $('#basicSearchPortal');
+        if ($(window).width() > 1000) {
+            if (srchport.parents('#basicAndBrowse').length === 0) {
+                const port = $('#basicSearchPortal').detach();
+                $('#basicAndBrowse')
+                    .prepend(port);
+            }
+        } else {
+            $('#l-column__search.closed').removeClass('closed');
+            if (srchport.parents('#basicAndBrowse').length > 0) {
+                const port = $('#basicSearchPortal').detach();
+                if($('.site-header-main-section-left.site-header-section.site-header-section-left #basicSearchPortal').length === 0) {
+                    $('.site-header-main-section-left.site-header-section.site-header-section-left')
+                        .append(port);
+                }
+
+            }
+
+        }
+    }
 
     const ActivateMobileSearchTab = () => {
-       $('#mobile-sidebar-tab').on('click', () => {
-           $("aside#secondary").show();
-           $('.l-content__rightsidebar.closeSideBar').removeClass('closeSideBar');
-           $('#mobile-sidebar-tab').hide();
-           $("button.treeNav-header__closeButton .shanticon-cancel").on('click', () => {
-               $('#mobile-sidebar-tab').show();
+        mandalaWindowResize();
+        const srch_toggle_rep = $('#main-search-tree-toggle-replica');
 
-           });
-        });
-
+        if (!srch_toggle_rep.hasClass('processed')) {
+            $('#main-search-tree-toggle-replica').click(() => {
+                $('#main-search-tree-toggle').click();
+                $('.l-content__rightsidebar.closeSideBar').removeClass('closeSideBar');
+            });
+            srch_toggle_rep.addClass('processed');
+        }
     }
 })(jQuery);
