@@ -34,11 +34,12 @@
     } /** End of #main */
 
     #secondary {
-      flex-basis: 20%;
+      flex-basis: 25%;
       flex-grow: 1;
       align-self: flex-start;
       margin: 0 0;
       padding: 0 0;
+      min-width: unset;
 
       .sidebar-inner-wrap {
         display: flex;

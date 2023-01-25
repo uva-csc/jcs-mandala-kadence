@@ -4,9 +4,12 @@
         // Highlight Active Hash Links in Primary Menu
         HashMenuActiveLink();  // In case page is loaded from link call at beginning
         CheckForHash();
+        ActivateMobileSearchTab();
+        $(window).on("resize", ActivateMobileSearchTab);
         // Otherwise, add event listener for hash changes
         window.addEventListener("hashchange", HashMenuActiveLink, false);
     });
+
 
     // Highlights the active link in a menu if it is a Mandala hash which loads content asynchronously
     const HashMenuActiveLink = () => {
@@ -33,4 +36,18 @@
         }
         $('body').removeClass('loading');
     };
+
+
+    const ActivateMobileSearchTab = () => {
+       $('#mobile-sidebar-tab').on('click', () => {
+           $("aside#secondary").show();
+           $('.l-content__rightsidebar.closeSideBar').removeClass('closeSideBar');
+           $('#mobile-sidebar-tab').hide();
+           $("button.treeNav-header__closeButton .shanticon-cancel").on('click', () => {
+               $('#mobile-sidebar-tab').show();
+
+           });
+        });
+
+    }
 })(jQuery);

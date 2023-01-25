@@ -42,6 +42,7 @@ class MandalaKadence {
 		// Custom Filters
         add_filter('pre_get_document_title', array($this, 'subsite_title_clean'));
 		add_filter('body_class', array($this, 'subsite_class'));
+		add_filter('body_class', array($this, 'login_class'));
         // Get main site title before overwriting in the following filter
         $this->main_title = get_bloginfo();
 		add_filter('pre_option_blogname', array($this, 'subsite_bname'));
@@ -185,6 +186,13 @@ class MandalaKadence {
             return $extra_classes;
         }
         return array('loading');
+	}
+
+	public function login_class() {
+		if (is_user_logged_in()) {
+			return array('logged-in');
+		}
+		return array();
 	}
 
     /**

@@ -1,5 +1,5 @@
 /** Convert header menu to dropdown when below 1420px **/
-@media screen and (max-width: 1450px) and (min-width: 1020px) {
+@media only screen and (max-width: 1450px) {
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation {
     position: relative;
     display: inline-block;
@@ -42,6 +42,40 @@
   }
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu li a:hover {
     color: white;
+  }
+}
+@media print {
+  #mobile-sidebar-tab {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  #mobile-sidebar-tab {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  aside#secondary:not(.open) {
+    display: none;
+  }
+
+  #mobile-sidebar-tab {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    height: 40px;
+    width: 40px;
+    border: 3px double #777;
+    z-index: 1000;
+    color: white;
+    padding: 0.3rem 0.5rem 0.7rem 1rem;
+    font-size: 130%;
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .logged-in #mobile-sidebar-tab {
+    top: 100px;
   }
 }
 /* Hide the #primary div until we check for and possibly load Mandala content  , footer#colophon */
@@ -111,11 +145,12 @@ body.loading footer#colophon {
   padding: 0;
 }
 #primary .content-container #secondary {
-  flex-basis: 20%;
+  flex-basis: 25%;
   flex-grow: 1;
   align-self: flex-start;
   margin: 0 0;
   padding: 0 0;
+  min-width: unset;
 }
 #primary .content-container #secondary .sidebar-inner-wrap {
   display: flex;
