@@ -1,5 +1,5 @@
 /** Convert header menu to dropdown when below 1420px **/
-@media screen and (max-width: 1450px) {
+@media screen and (max-width: 1450px) and (min-width: 1020px) {
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation {
     position: relative;
     display: inline-block;
