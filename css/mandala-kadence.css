@@ -238,7 +238,7 @@ div#basicAndBrowse #browseSearchPortal main-search-tree-toggle svg {
 
 .l-column__related.c-collection__metadata li, .l-column__related.c-collection__metadata a {
   font-size: 15px;
-  text-indent: -0.75rem;
+  /*text-indent: -0.75rem;*/
 }
 
 div.mandala-message {
