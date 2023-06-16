@@ -3,6 +3,11 @@
   position: fixed;
   height: 60px;
   width: 100%;
+
+  #mobile-header #basicSearchPortal {
+    margin-left: 100px;
+  }
+
 }  /** End of #masthead */
 
 #primary {
@@ -33,12 +38,30 @@
       }
     } /** End of #main */
 
+    #mobile-sidebar-buttons {
+      position: absolute;
+      right: 50px;
+      top: 0px;
+      height: 60px;
+      z-index: 200;
+
+      &>* {
+        height: 60px !important;
+      }
+
+      label {
+        padding-top: 14px;
+        height: unset;
+      }
+    }
+
     #secondary {
-      flex-basis: 20%;
+      flex-basis: 25%;
       flex-grow: 1;
       align-self: flex-start;
       margin: 0 0;
       padding: 0 0;
+      min-width: unset;
 
       .sidebar-inner-wrap {
         display: flex;
@@ -84,7 +107,7 @@ div#basicAndBrowse {
       #advanced-site-settings {
         font-size: 16px;
         width: 50px;
-
+        border: none;
         svg {
           margin-top: -4px;
         }
