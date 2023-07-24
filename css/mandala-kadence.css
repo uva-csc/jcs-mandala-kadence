@@ -1,3 +1,68 @@
+/** Convert header menu to dropdown when below 1420px **/
+@media only screen and (max-width: 1450px) {
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    background-image: url("https://thl-new.local/wp-content/themes/mandala-kadence/images/hamburger.svg");
+    background-repeat: no-repeat;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation:hover > div > ul {
+    display: block;
+    margin-top: 40px;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul {
+    display: none;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li.current-menu-item > a {
+    background-color: #3f49b1;
+    color: #eeeeee !important;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li.current-menu-item > a:after {
+    display: none;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li ul.sub-menu {
+    display: none;
+    padding: 0;
+    margin: 0;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu {
+    display: block;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu li {
+    border-bottom: thin solid #aaa;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu li a {
+    color: black;
+  }
+  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu li a:hover {
+    color: white;
+  }
+}
+@media print {
+  #mobile-sidebar-tab {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  #mobile-sidebar-buttons {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  aside#secondary:not(.open) {
+    display: none;
+  }
+
+  .logged-in #mobile-sidebar-buttons {
+    top: 100px;
+  }
+}
 /* Hide the #primary div until we check for and possibly load Mandala content  , footer#colophon */
 body.loading #primary {
   display: none;
@@ -31,7 +96,12 @@ body.loading footer#colophon {
   position: fixed;
   height: 60px;
   width: 100%;
-} /** End of #masthead */
+}
+#masthead #mobile-header #basicSearchPortal {
+  margin-left: 100px;
+}
+
+/** End of #masthead */
 #primary {
   /** End of .content-container **/
 }
@@ -41,6 +111,7 @@ body.loading footer#colophon {
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: stretch;
+  grid-gap: unset;
   /*  Add these styles back in to effect full width content
   gap: 0;
   margin: 0;
@@ -61,12 +132,27 @@ body.loading footer#colophon {
 #primary .content-container #main .entry-content-wrap {
   padding: 0;
 }
+#primary .content-container #mobile-sidebar-buttons {
+  position: absolute;
+  right: 50px;
+  top: 0px;
+  height: 60px;
+  z-index: 200;
+}
+#primary .content-container #mobile-sidebar-buttons > * {
+  height: 60px !important;
+}
+#primary .content-container #mobile-sidebar-buttons label {
+  padding-top: 14px;
+  height: unset;
+}
 #primary .content-container #secondary {
-  flex-basis: 20%;
+  flex-basis: 25%;
   flex-grow: 1;
   align-self: flex-start;
   margin: 0 0;
   padding: 0 0;
+  min-width: unset;
 }
 #primary .content-container #secondary .sidebar-inner-wrap {
   display: flex;
@@ -106,6 +192,7 @@ div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label.active s
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings {
   font-size: 16px;
   width: 50px;
+  border: none;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings svg {
   margin-top: -4px;
@@ -151,13 +238,14 @@ div#basicAndBrowse #browseSearchPortal main-search-tree-toggle svg {
 
 .l-column__related.c-collection__metadata li, .l-column__related.c-collection__metadata a {
   font-size: 15px;
-  text-indent: -0.75rem;
+  /*text-indent: -0.75rem;*/
 }
 
 div.mandala-message {
   width: 100%;
   /* Colors taken from BS: https://getbootstrap.com/docs/4.5/utilities/colors/ */
-  background-color: #17a2b8; /* Info color */
+  background-color: #17a2b8;
+  /* Info color */
 }
 div.mandala-message.success {
   background-color: #28a745 !important;

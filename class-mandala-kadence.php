@@ -42,10 +42,16 @@ class MandalaKadence {
 		// Custom Filters
         add_filter('pre_get_document_title', array($this, 'subsite_title_clean'));
 		add_filter('body_class', array($this, 'subsite_class'));
+		add_filter('body_class', array($this, 'login_class'));
         // Get main site title before overwriting in the following filter
         $this->main_title = get_bloginfo();
 		add_filter('pre_option_blogname', array($this, 'subsite_bname'));
         add_filter('kadence_logo_url', array($this, 'subsite_url'));
+		// Disable update emails
+		add_filter( 'auto_core_update_send_email', array($this, 'stop_wpupdate_emails'), 10, 4);
+		add_filter( 'auto_plugin_update_send_email', '__return_false' );
+		add_filter( 'auto_theme_update_send_email', '__return_false' );
+
 	}
 
 	function init() {
@@ -67,6 +73,7 @@ class MandalaKadence {
 			wp_enqueue_style( 'mandala-kadence-custom-styles-' . $n,  get_stylesheet_directory_uri() . "/css/custom/$cssfile",
 				false,'1.0','all');
 		}
+
 	}
 
 	/**
@@ -236,6 +243,13 @@ class MandalaKadence {
         return array('loading');
 	}
 
+	public function login_class() {
+		if (is_user_logged_in()) {
+			return array('logged-in');
+		}
+		return array();
+	}
+
     /**
      * Show a particular navigation menu for a subsite
      */
@@ -392,6 +406,15 @@ class MandalaKadence {
             return $response;
         }
     }
+
+	// Disable automatic emails for wp update when they succeed
+	public function stop_wpupdate_emails( $send, $type, $core_update, $result ) {
+		if ( ! empty( $type ) && $type == 'success' ) {
+			return false;
+		}
+		return true;
+	}
+
 }
 
 $mandalakadence = new MandalaKadence();
