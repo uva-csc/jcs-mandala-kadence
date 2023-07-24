@@ -31,7 +31,7 @@ class MandalaKadence {
 	function __construct() {
 		// Custom Actions
 		add_action('after_setup_theme', array($this, 'init'));
-        add_action('wp_head', array($this, 'subsite_add_css'));
+        add_action('wp_head', array($this, 'mandala_update_header'));
         add_action('kadence_top_header', array($this, 'subsite_back_link'));
 		add_action('kadence_header', array($this, 'add_custom_data'));
 		add_action('get_template_part_template-parts/header/navigation', array($this, 'subsite_nav'));
@@ -85,10 +85,12 @@ class MandalaKadence {
      * Each rule in the CSS field and each selector within each rule is appended with the
      * body class for the subsite, e.g .my-subsite div.foo, .my-subsite div.bar {...}, etc.
      */
-    public function subsite_add_css() {
+    public function mandala_update_header() {
+        $pgid = get_the_ID();
+        // Import subsite info for a page
         $subinf = $this->get_subsite_info();
         if (!empty($subinf['css'])) {
-            $subid = $subinf['class'] ?: 'subsite' . get_the_ID();
+            $subid = $subinf['class'] ?: 'subsite' . $pgid;
             $css_lines = preg_split("/\n*}\n*/", $subinf['css']);
             $css_lines = array_map(function($item) use ($subid) {
                 if (empty($item)) { return ""; }
@@ -106,6 +108,53 @@ class MandalaKadence {
             // error_log("Subsite CSS ($subid):\n$css_lines");
             echo '<style id="' . $subid . '-styles">' . $css_lines . '</style>';
         }
+
+        // Get text info if article in journal and add citation meta tags
+        if ($pgid) {
+            $text_id = get_field('mandala_text_id', $pgid);
+            if ($text_id) {
+                $url = 'https://texts.mandala.library.virginia.edu/shanti_texts/node_json/' . $text_id;
+                $data = $this->get_data($url);
+                $data = json_decode($data, true);
+                echo "\n\n<!-- Mandala Meta Tags -->\n";
+                // Title
+                $title = $data['title'];
+                $this->add_meta('citation_title', $title);
+                // Authors
+                $authors = $data['field_book_author']['und'];
+                $author_map = array_map(function ($a) { return $a['value']; }, $authors);
+                $alist = implode(', ', $author_map);
+                $this->add_meta('citation_author', $alist);
+
+                // Journal Title
+                $options = get_option( 'mandala_plugin_options' );
+                $journal = !empty($options['journal_title']) ? $options['journal_title'] : False;
+                if (!empty($journal)) {
+                    $this->add_meta('citation_journal', $journal);
+                }
+
+                // DOI
+                $doi = $data['field_doi']['und'][0]['value'];
+                $this->add_meta('citation_doi', trim($doi));
+
+                // Abstract
+                $fullbook = $data['field_book_content']['und']['0']['value'];
+                if(str_contains($fullbook, 'Abstract:')) {
+                    $abs = explode('Abstract:', $fullbook)[1];
+                    $abs = strip_tags($abs);
+                    if (!empty($abs)) {
+                        $this->add_meta('citations_abstract', trim($abs));
+                    }
+                }
+
+                // Comment closure
+                echo "<!-- End of Mandala Meta Tags -->\n\n";
+            }
+        }
+    }
+
+    private function add_meta($name, $cnt) {
+        echo "<meta name=\"$name\" content=\"$cnt\" /> \n";
     }
 
     /**
@@ -315,6 +364,32 @@ class MandalaKadence {
             return get_home_url() . '/' . get_page_uri($thepost);
         } else {
             return get_home_url();
+        }
+    }
+
+    private function get_data($url) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "x-rapidapi-host: unogsng.p.rapidapi.com",
+                "x-rapidapi-key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            ),
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            error_log("cURL ($url) Error #:" . $err);
+        } else {
+            return $response;
         }
     }
 }
