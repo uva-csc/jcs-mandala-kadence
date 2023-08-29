@@ -78,11 +78,13 @@ class MandalaKadence {
 
 	/**
 	 * This function adds custom data as a JSON object to the DOM to be used by an embedded React standalone
+     * Adds script tage with JSON text in it. (Deprecated)
+     * Replaced by window.mandala_wp settings in mandala plugin's enqueue_scripts function
 	 */
 	public function add_custom_data() {
 		$options = get_option( 'mandala_plugin_options' );
-		$sbval = !empty($options['default_sidebar']) ? $options['default_sidebar'] * 1 : False;
-		if ($sbval) {
+        if (is_numeric($options['default_sidebar'])) {
+		    $sbval = $options['default_sidebar'] * 1;
 			echo '<script type="application/json" id="mandala_data">{ "sidebar": ' . $sbval . ' }</script>';
 		}
 	}
