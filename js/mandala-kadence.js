@@ -77,7 +77,7 @@
     }
 
     // Settings link in Main Menu has class "mandalaSettings" which is a React portal for the button to show the settings modal.
-    // But the button doesn't display in the menu. So need this function to click it when menu link is clicked
+    // But the button doesn't display in the menu. So need this function to click it when menu link is clicked.
     const ActivateSettingsLink = () => {
         $('nav#mobile-site-navigation').on('click', 'li.mandalaSettings a', () => {
             $('button#advanced-site-settings').click();

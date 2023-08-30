@@ -1,16 +1,18 @@
 /** Convert header menu to dropdown when below 1420px **/
-@media only screen and (max-width: 1450px) {
+@media only screen and (max-width: 8000px) {
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation {
-    position: relative;
+    position: absolute;
     display: inline-block;
     width: 50px;
     height: 30px;
     background-image: url("/wp-content/themes/mandala-kadence/images/hamburger.svg");
     background-repeat: no-repeat;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation:hover > div > ul {
-    display: block;
-    margin-top: 40px;
+    /*
+        &:hover > div > ul {
+          display: block;
+          margin-top: 40px;
+        }
+    */
   }
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul {
     display: none;
