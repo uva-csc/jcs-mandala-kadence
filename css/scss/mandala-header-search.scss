@@ -86,7 +86,7 @@ div#basicAndBrowse {
   }
   #browseSearchPortal {
     position: absolute;
-    right: 0 !important;
+    right: 50px !important;
     top: -1px;
 
     .c-MainSearchToggle--group {
@@ -108,6 +108,8 @@ div#basicAndBrowse {
         font-size: 16px;
         width: 50px;
         border: none;
+        background: transparent;
+        color: #3f49b1;
         svg {
           margin-top: -4px;
         }

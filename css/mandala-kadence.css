@@ -5,7 +5,7 @@
     display: inline-block;
     width: 50px;
     height: 30px;
-    background-image: url("https://thl-new.local/wp-content/themes/mandala-kadence/images/hamburger.svg");
+    background-image: url("/wp-content/themes/mandala-kadence/images/hamburger.svg");
     background-repeat: no-repeat;
   }
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation:hover > div > ul {
@@ -173,7 +173,7 @@ div#basicAndBrowse #basicSearchPortal {
 }
 div#basicAndBrowse #browseSearchPortal {
   position: absolute;
-  right: 0 !important;
+  right: 50px !important;
   top: -1px;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label, div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group button {
@@ -193,6 +193,8 @@ div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site
   font-size: 16px;
   width: 50px;
   border: none;
+  background: transparent;
+  color: #3f49b1;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings svg {
   margin-top: -4px;

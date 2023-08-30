@@ -5,6 +5,7 @@
         HashMenuActiveLink();  // In case page is loaded from link call at beginning
         CheckForHash();
         ActivateMobileSearchTab();
+        ActivateSettingsLink();
         $(window).on("resize", mandalaWindowResize);
         // Otherwise, add event listener for hash changes
         window.addEventListener("hashchange", HashMenuActiveLink, false);
@@ -73,5 +74,14 @@
             });
             srch_toggle_rep.addClass('processed');
         }
+    }
+
+    // Settings link in Main Menu has class "mandalaSettings" which is a React portal for the button to show the settings modal.
+    // But the button doesn't display in the menu. So need this function to click it when menu link is clicked
+    const ActivateSettingsLink = () => {
+        $('nav#mobile-site-navigation').on('click', 'li.mandalaSettings a', () => {
+            $('button#advanced-site-settings').click();
+            return false;
+        });
     }
 })(jQuery);
