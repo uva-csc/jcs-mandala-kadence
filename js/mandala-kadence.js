@@ -4,9 +4,9 @@
         // Highlight Active Hash Links in Primary Menu
         HashMenuActiveLink();  // In case page is loaded from link call at beginning
         CheckForHash();
-        ActivateMobileSearchTab();
+        // ActivateMobileSearchTab();
         ActivateSettingsLink();
-        $(window).on("resize", mandalaWindowResize);
+        // $(window).on("resize", mandalaWindowResize);
         // Otherwise, add event listener for hash changes
         window.addEventListener("hashchange", HashMenuActiveLink, false);
     });
