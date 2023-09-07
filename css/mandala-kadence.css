@@ -136,18 +136,25 @@ body.loading footer#colophon {
   display: flex;
   flex-direction: column;
 }
+#primary .content-container #secondary .widget_nav_menu {
+  border-top: 0.6rem double #3f49b1;
+  border-left: 0.25rem solid #d0d0d0;
+}
 #primary .content-container #secondary .widget_nav_menu h2.widget-title {
   display: flex;
   justify-content: space-between;
   margin: 0 0 0.15rem;
-  font-size: 1.45rem;
-  font-weight: 600;
+  padding-left: 2.5rem;
+  font-size: 2.15rem;
+  line-height: 1.7;
   letter-spacing: 0.0525rem;
+  font-weight: 400;
+  font-family: "GB Garamond", serif;
   background-color: #3f49b1;
   border-bottom: 0.6rem double #fff;
   height: 4.2rem;
-  padding: 1rem;
-  color: white;
+  color: #EEE;
+  text-transform: capitalize;
 }
 #primary .content-container #secondary .widget_nav_menu .menu-main-menu-container {
   padding: 0 2rem;

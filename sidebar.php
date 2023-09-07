@@ -22,7 +22,6 @@ include_once('mobile-basic-buttons.php');
 
 // Check Mandala Plugin option to see if sidebar is closed and add 'display: none;'
 $options = get_option( 'mandala_plugin_options' );
-$closestyle = '';
 if ($options['default_sidebar'] * 1 == 0) {
     $closestyle = ' style="display: none;"';
 }
