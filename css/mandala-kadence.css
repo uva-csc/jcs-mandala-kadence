@@ -131,14 +131,15 @@ body.loading footer#colophon {
   margin: 0 0;
   padding: 0 0;
   min-width: unset;
+  /* For Main menu in sidebar widget */
 }
 #primary .content-container #secondary .sidebar-inner-wrap {
   display: flex;
   flex-direction: column;
 }
 #primary .content-container #secondary .widget_nav_menu {
-  border-top: 0.6rem double #3f49b1;
-  border-left: 0.25rem solid #d0d0d0;
+  /* border-top: .6rem double #3f49b1;
+  border-left: .25rem solid #d0d0d0; */
 }
 #primary .content-container #secondary .widget_nav_menu h2.widget-title {
   display: flex;
@@ -150,8 +151,8 @@ body.loading footer#colophon {
   letter-spacing: 0.0525rem;
   font-weight: 400;
   font-family: "GB Garamond", serif;
-  background-color: #3f49b1;
-  border-bottom: 0.6rem double #fff;
+  background-color: #000;
+  /* border-bottom: .6rem double #fff; */
   height: 4.2rem;
   color: #EEE;
   text-transform: capitalize;

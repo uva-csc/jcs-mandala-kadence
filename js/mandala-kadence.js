@@ -6,6 +6,7 @@
         CheckForHash();
         // ActivateMobileSearchTab();
         ActivateSettingsLink();
+        MainMenuUpdates();
         // $(window).on("resize", mandalaWindowResize);
         // Otherwise, add event listener for hash changes
         window.addEventListener("hashchange", HashMenuActiveLink, false);
@@ -82,6 +83,15 @@
         $('nav#mobile-site-navigation').on('click', 'li.mandalaSettings a', () => {
             $('button#advanced-site-settings').click();
             return false;
+        });
+    }
+
+    const MainMenuUpdates = () => {
+        $('#secondary .widget_nav_menu h2.widget-title').append('<div class="main-menu-close"><span class="icon shanticon-cancel"></span></div>');
+        $('#secondary .widget_nav_menu h2.widget-title').on('click', '.shanticon-cancel', function(e) {
+            console.log("close btn clicked");
+            console.log("close btn clicked");
+            $('#secondary, #secondary .l-content__rightsidebar').hide();
         });
     }
 })(jQuery);
