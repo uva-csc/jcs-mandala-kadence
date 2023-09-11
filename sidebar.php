@@ -18,7 +18,7 @@ if ( ! kadence()->has_sidebar() ) {
 }
 kadence()->print_styles( 'kadence-sidebar' );
 
-// include_once('mobile-basic-buttons.php');
+include_once('mobile-basic-buttons.php');
 
 // Check Mandala Plugin option to see if sidebar is closed and add 'display: none;'
 $options = get_option( 'mandala_plugin_options' );

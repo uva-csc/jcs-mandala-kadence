@@ -1,6 +1,6 @@
 /* Hide the #primary div until we check for and possibly load Mandala content  , footer#colophon */
 body.loading {
-  #primary {
+  #primary, #secondary {
     display: none;
   }
 
