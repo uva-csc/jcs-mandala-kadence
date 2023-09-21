@@ -1,4 +1,3 @@
-
 /** Convert header menu to dropdown when below 1420px **/
 @media only screen and (max-width: 1450px) {
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation {
@@ -6,7 +5,7 @@
     display: inline-block;
     width: 50px;
     height: 30px;
-    background-image: url("https://thl-new.local/wp-content/themes/mandala-kadence/images/hamburger.svg") ;
+    background-image: url("/wp-content/themes/mandala-kadence/images/hamburger.svg") ;
     background-repeat: no-repeat;
 
     &:hover > div > ul {
