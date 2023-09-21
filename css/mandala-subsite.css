@@ -1,9 +1,0 @@
-.subsite .subsite-back img.custom-logo {
-  max-width: 40px;
-  display: inline-block;
-}
-.subsite .subsite-logo + .custom-logo {
-  display: none !important;
-}
-
-/*# sourceMappingURL=mandala-subsite.css.map */

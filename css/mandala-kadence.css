@@ -1,49 +1,62 @@
-/** Convert header menu to dropdown when below 1420px **/
+/** Convert header menu to dropdown when below 1420px
 @media only screen and (max-width: 1450px) {
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation {
     position: relative;
     display: inline-block;
     width: 50px;
     height: 30px;
+<<<<<<< HEAD
     background-image: url("/wp-content/themes/mandala-kadence/images/hamburger.svg");
+=======
+    background-image: url("/wp-content/themes/mandala-kadence/images/hamburger.svg") ;
+>>>>>>> mandala-kadence-main
     background-repeat: no-repeat;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation:hover > div > ul {
-    display: block;
-    margin-top: 40px;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul {
-    display: none;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    padding: 12px 16px;
-    z-index: 1;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li.current-menu-item > a {
-    background-color: #3f49b1;
-    color: #eeeeee !important;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li.current-menu-item > a:after {
-    display: none;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li ul.sub-menu {
-    display: none;
-    padding: 0;
-    margin: 0;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu {
-    display: block;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu li {
-    border-bottom: thin solid #aaa;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu li a {
-    color: black;
-  }
-  body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation ul li:hover ul.sub-menu li a:hover {
-    color: white;
+
+    &:hover > div > ul {
+      display: block;
+      margin-top: 40px;
+    }
+
+    ul {
+      display: none;
+      background-color: #f9f9f9;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      padding: 12px 16px;
+      z-index: 1;
+
+      li.current-menu-item {
+        & > a {
+          background-color: #3f49b1;
+          color: #eeeeee!important;
+
+          &:after {
+            display:none;
+          }
+        }
+      }
+
+      li ul.sub-menu {
+        display: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      li:hover ul.sub-menu {
+        display: block;
+        li {
+          border-bottom: thin solid #aaa;
+        }
+        li a {
+          color: black;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
   }
 }
+**/
 @media print {
   #mobile-sidebar-tab {
     display: none;
@@ -64,44 +77,13 @@
   }
 }
 /* Hide the #primary div until we check for and possibly load Mandala content  , footer#colophon */
-body.loading #primary {
+body.loading #primary, body.loading #secondary {
   display: none;
 }
 body.loading footer#colophon {
   background: unset;
 }
 
-.mt {
-  margin-top: 0.5rem;
-}
-
-.subsite .subsite-back {
-  height: 26px;
-}
-.subsite .subsite-back img.custom-logo {
-  display: inline-block;
-  height: 20px;
-  width: 20px;
-  top: -1px;
-  padding: 0 3px 3px;
-}
-.subsite .subsite-back .back-link {
-  font-size: 80%;
-}
-.subsite .subsite-logo + .custom-logo {
-  display: none !important;
-}
-
-#masthead {
-  position: fixed;
-  height: 60px;
-  width: 100%;
-}
-#masthead #mobile-header #basicSearchPortal {
-  margin-left: 100px;
-}
-
-/** End of #masthead */
 #primary {
   /** End of .content-container **/
 }
@@ -153,13 +135,64 @@ body.loading footer#colophon {
   margin: 0 0;
   padding: 0 0;
   min-width: unset;
+  /* For Main menu in sidebar widget */
 }
 #primary .content-container #secondary .sidebar-inner-wrap {
   display: flex;
   flex-direction: column;
 }
+#primary .content-container #secondary .widget_nav_menu {
+  /* border-top: .6rem double #3f49b1;
+  border-left: .25rem solid #d0d0d0; */
+}
+#primary .content-container #secondary .widget_nav_menu h2.widget-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 0.15rem;
+  padding-left: 2.5rem;
+  font-size: 2.15rem;
+  line-height: 1.7;
+  letter-spacing: 0.0525rem;
+  font-weight: 400;
+  font-family: "GB Garamond", serif;
+  background-color: #000;
+  /* border-bottom: .6rem double #fff; */
+  height: 4.2rem;
+  color: #EEE;
+  text-transform: capitalize;
+}
+#primary .content-container #secondary .widget_nav_menu .menu-main-menu-container {
+  padding: 0 2rem;
+}
 
 /** End of #primary flex layout **/
+.subsite .subsite-back {
+  height: 26px;
+}
+.subsite .subsite-back img.custom-logo {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  top: -1px;
+  padding: 0 3px 3px;
+}
+.subsite .subsite-back .back-link {
+  font-size: 80%;
+}
+.subsite .subsite-logo + .custom-logo {
+  display: none !important;
+}
+
+#masthead {
+  position: fixed;
+  height: 60px;
+  width: 100%;
+}
+#masthead #mobile-header #basicSearchPortal {
+  margin-left: 100px;
+}
+
+/** End of #masthead */
 div#basicAndBrowse {
   display: flex;
   margin-left: 2rem;
@@ -173,7 +206,7 @@ div#basicAndBrowse #basicSearchPortal {
 }
 div#basicAndBrowse #browseSearchPortal {
   position: absolute;
-  right: 0 !important;
+  right: 0px !important;
   top: -1px;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group label, div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group button {
@@ -193,6 +226,8 @@ div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site
   font-size: 16px;
   width: 50px;
   border: none;
+  background: transparent;
+  color: #3f49b1;
 }
 div#basicAndBrowse #browseSearchPortal .c-MainSearchToggle--group #advanced-site-settings svg {
   margin-top: -4px;
@@ -260,6 +295,15 @@ div.mandala-message h5 {
   margin: 0 auto;
   padding: 0.5rem;
   width: fit-content;
+}
+
+.mt {
+  margin-top: 0.5rem;
+}
+
+.menu .menu-item .cat-icon {
+  width: 25px;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=mandala-kadence.css.map */

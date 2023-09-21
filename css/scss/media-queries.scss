@@ -1,4 +1,5 @@
-/** Convert header menu to dropdown when below 1420px **/
+
+/** Convert header menu to dropdown when below 1420px
 @media only screen and (max-width: 1450px) {
   body #masthead > #main-header > .site-header-inner-wrap nav.main-navigation {
     position: relative;
@@ -52,6 +53,8 @@
     }
   }
 }
+**/
+
 @media print {
   #mobile-sidebar-tab {
     display: none;
