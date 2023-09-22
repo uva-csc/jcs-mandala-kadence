@@ -65,6 +65,7 @@ function get_nodejson($site, $nid) {
     $uid ="$site-$nid";
     $sdoc = get_solr_record($uid);
     $node_json_url = $sdoc['url_json'];
+    //error_log("node json url: " . $node_json_url);
     if (!empty($node_json_url)) {
         $njdata = file_get_contents($node_json_url);
         // error_log('node json data: ' . $njdata);
@@ -199,9 +200,24 @@ class MandalaKadence {
 
                 // Journal Title
                 $options = get_option( 'mandala_plugin_options' );
-                $journal = !empty($options['journal_title']) ? $options['journal_title'] : False;
+                // error_log(json_encode($options));
+
+                $journal = '';
+                if (!empty($nodejson['field_journal_title']['und'][0]['value'])) {
+                    $journal = $nodejson['field_journal_title']['und'][0]['value'];
+                } else if (!empty($options['journal_title'])) {
+                    $journal = $options['journal_title'];
+                }
                 if (!empty($journal)) {
-                    $this->add_meta('citation_journal', $journal);
+                    $this->add_meta('citation_journal_title', $journal);
+                }
+
+                if (!empty($nodejson['field_journal_volume']['und'][0]['value'])) {
+                    $this->add_meta('citation_volume', $nodejson['field_journal_volume']['und'][0]['value']);
+                }
+
+                if (!empty($nodejson['field_journal_issue']['und'][0]['value'])) {
+                    $this->add_meta('citation_issue', $nodejson['field_journal_issue']['und'][0]['value']);
                 }
 
                 // Pages
@@ -225,6 +241,11 @@ class MandalaKadence {
                     if (!empty($abs)) {
                         $this->add_meta('citations_abstract', trim($abs));
                     }
+                }
+
+                // PDF URL
+                if (!empty($nodejson['field_external_pdf']['und'][0]['value'])) {
+                    $this->add_meta('citation_pdf_url', $nodejson['field_external_pdf']['und'][0]['value']);
                 }
 
                 // Comment closure
