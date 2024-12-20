@@ -222,7 +222,7 @@ class MandalaKadence {
 
                 // Pages
                 $stpg = 1;
-                $endpg = $nodejson['field_pages']['und'][0]['value'];
+                $endpg = $nodejson['field_pages']['und'][0]['value'] ?? 10;
                 if(strstr($endpg, '-')) {
                     [$stpg, $endpg] = explode('-', $endpg);
                 }
