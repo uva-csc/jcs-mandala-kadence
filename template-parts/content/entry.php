@@ -35,11 +35,16 @@ namespace Kadence;
 		 */
 		do_action( 'kadence_loop_entry_content' );
 		?>
-		
-		<!-- Special Issue Abstract Link -->
-		<?php if(get_field('abstract_link')) {
-    		echo '<p class="special-issues-link"><a href="' . get_field('abstract_link') . '">Read the full abstract here.</a></p>';
-		} ?>
-		
-	</div>
+
+        <!-- Special Issue Abstract Link -->
+        <?php if(get_field('abstract_link')) {
+            echo '<p class="special-issues-link"><a href="' . get_field('abstract_link') . '">Read the full abstract.</a></p>';
+        } ?>
+
+        <!-- Special Issue Collection Link -->
+        <?php if(get_field('collection_link')) {
+            echo '<p class="special-issues-link"><a href="' . get_field('collection_link') . '">Read the issue.</a></p>';
+        } ?>
+
+    </div>
 </article>
