@@ -63,14 +63,17 @@ function get_solr_record($uid) {
 
 function get_nodejson($site, $nid) {
     $uid ="$site-$nid";
+    // error_log("Uid for node json: $uid");
     $sdoc = get_solr_record($uid);
-    $node_json_url = $sdoc['url_json'];
-    //error_log("node json url: " . $node_json_url);
-    if (!empty($node_json_url)) {
-        $njdata = file_get_contents($node_json_url);
-        // error_log('node json data: ' . $njdata);
-        $node_json = json_decode($njdata, TRUE);
-        return $node_json;
+    if (!empty($sdoc) && in_array('url_json', array_keys($sdoc))) {
+        $node_json_url = $sdoc['url_json'];
+        //error_log("node json url: " . $node_json_url);
+        if (!empty($node_json_url)) {
+            $njdata = file_get_contents($node_json_url);
+            // error_log('node json data: ' . $njdata);
+            $node_json = json_decode($njdata, TRUE);
+            return $node_json;
+        }
     }
     return FALSE;
 }
@@ -174,11 +177,12 @@ class MandalaKadence {
         }
 
         // Get text info if article in journal and add citation meta tags
+        // error_log("\n\n**** Page id: $pgid *****\n\n");
         if ($pgid) {
             $text_id = get_field('mandala_text_id', $pgid);
             // error_log('Text id: ' . $text_id);
-            if ($text_id) {
-                $nodejson = get_nodejson("texts", $text_id);
+            $nodejson = $text_id ? get_nodejson("texts", $text_id) : false;
+            if ($nodejson) {
                 echo "\n\n<!-- Mandala Meta Tags -->\n";
 
                 // Title
