@@ -96,6 +96,7 @@ class MandalaKadence {
 		add_action('get_template_part_template-parts/header/navigation', array($this, 'subsite_nav'));
 		add_action('before_kadence_logo_output', array($this, 'subsite_logo'));
 		add_action('kadence_footer_navigation', array($this, 'subsite_footer'));
+        add_action('mandala_contributor_content', array($this, 'contributor_content'));
         //add_action('kadence_hero_header', array($this, 'subsite_title'));
 
 		// Custom Filters
@@ -332,6 +333,13 @@ class MandalaKadence {
 	 */
 	public function update_body_class() {
         $extra_classes = array('loading'); # Add loading class to hide menu initially
+        // Add content type to body class
+        if ( is_singular() ) {
+            global $post;
+            if ( isset( $post->post_type ) ) {
+                $extra_classes[] = $post->post_type;
+            }
+        }
         // Adds specific classes to the body for subsites.
         if ($this->is_subsite()) {
             $extra_classes[] = 'subsite'; # start list with generic "subsite" class for body
@@ -374,6 +382,26 @@ class MandalaKadence {
 			echo "$prefels $menu $suffels";
 		}
 	}
+
+    /**
+     * Display a custom AFC type currents contributor
+     */
+    function contributor_content() {
+
+        $fields = array_merge(get_fields(), array('post_type' => get_post_type()));
+        $fields = array_filter($fields, function($value, $key) {
+            if (strpos($key, '_name') > 0) {
+                return false;
+            }
+            return !empty($value);
+        }, ARRAY_FILTER_USE_BOTH);
+
+        if ($fields['photo']) {
+            $image = $fields['photo'];
+            $fields['photo'] = '<img src="' . esc_url($image['url']) . '" alt="' . esc_attr($image['alt']) . '">';
+        }
+        get_template_part( 'template-parts/mandala/currents-contributor-content', null,  $fields);
+    }
 
     /**
      * Display a custom footer menu for a subsite

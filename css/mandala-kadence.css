@@ -5,11 +5,7 @@
     display: inline-block;
     width: 50px;
     height: 30px;
-<<<<<<< HEAD
-    background-image: url("/wp-content/themes/mandala-kadence/images/hamburger.svg");
-=======
     background-image: url("/wp-content/themes/mandala-kadence/images/hamburger.svg") ;
->>>>>>> mandala-kadence-main
     background-repeat: no-repeat;
 
     &:hover > div > ul {
@@ -71,7 +67,6 @@
   aside#secondary:not(.open) {
     display: none;
   }
-
   .logged-in #mobile-sidebar-buttons {
     top: 100px;
   }
@@ -166,6 +161,39 @@ body.loading footer#colophon {
 }
 
 /** End of #primary flex layout **/
+body.currents-contributor {
+  /** Custom flex layout for Contributors */
+}
+body.currents-contributor .two-col {
+  display: flex;
+  gap: 1rem; /* space between columns */
+}
+body.currents-contributor .two-col .col {
+  flex: 1;
+}
+@media (max-width: 768px) {
+  body.currents-contributor .two-col {
+    flex-direction: column;
+  }
+}
+body.currents-contributor h1 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+body.currents-contributor h1 > p:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+}
+body.currents-contributor div.img-wrap {
+  margin-top: 3rem;
+  padding: 1rem;
+}
+body.currents-contributor div.img-wrap img {
+  border: thin solid #888;
+  border-radius: 1rem;
+  filter: drop-shadow(12px 12px 4px rgba(0, 0, 0, 0.2));
+}
+
 .subsite .subsite-back {
   height: 26px;
 }
@@ -279,8 +307,7 @@ div#basicAndBrowse #browseSearchPortal main-search-tree-toggle svg {
 div.mandala-message {
   width: 100%;
   /* Colors taken from BS: https://getbootstrap.com/docs/4.5/utilities/colors/ */
-  background-color: #17a2b8;
-  /* Info color */
+  background-color: #17a2b8; /* Info color */
 }
 div.mandala-message.success {
   background-color: #28a745 !important;

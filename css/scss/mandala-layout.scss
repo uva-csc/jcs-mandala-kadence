@@ -100,3 +100,45 @@ body.loading {
 
 } /** End of #primary flex layout **/
 
+
+// Styles for Contributors
+
+body.currents-contributor {
+  /** Custom flex layout for Contributors */
+  .two-col {
+    display: flex;
+    gap: 1rem; /* space between columns */
+  }
+
+  .two-col .col {
+    flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    .two-col {
+      flex-direction: column;
+    }
+  }
+
+  h1 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  h1 > p:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  div.img-wrap {
+    margin-top: 3rem;
+    padding: 1rem;
+    img {
+      border: thin solid #888;
+      border-radius: 1rem;
+      filter: drop-shadow(12px 12px 4px rgba(0, 0, 0, 0.2));
+    }
+  }
+}
+
+

@@ -19,7 +19,6 @@ namespace Kadence;
 		do_action( 'kadence_loop_entry_thumbnail' );
 	?>
 	<div class="entry-content-wrap">
-			
 		<!-- Special Issue Custom Field -->
 		<?php if(get_field('issue_number')) {
     		echo '<p class="special-issues-number">Special Issue #' . get_field('issue_number') . '</p>';
