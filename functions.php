@@ -127,7 +127,7 @@ function custom_article_meta_tags() {
             "@context" => "https://schema.org",
             "@type" => "ScholarlyArticle",
             "headline" => $title,
-            "datePublished" => get_the_date('Y-m-d', $year),
+            "datePublished" => $year,
             "image" => $image,
             "url" => $url,
             "publisher" => [
