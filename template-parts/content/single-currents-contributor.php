@@ -32,7 +32,7 @@ do_action( 'kadence_hero_header' );
 						/**
 						 * Hook in content single entry template.
 						 */
-						do_action( 'mandala_contributor_content' );
+						do_action( '    mandala_contributor_content' );
 					}
 				} else {
 					get_template_part( 'template-parts/content/error' );
