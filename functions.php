@@ -59,6 +59,11 @@ add_action('wp', function() {
 }, 99);
 
 add_filter('wpseo_json_ld_output', '__return_false');
+add_filter('wpseo_opengraph', '__return_false');
+add_filter('wpseo_twitter', '__return_false');
+add_filter('wpseo_metadesc', '__return_false');
+add_filter('wpseo_canonical', '__return_false');
+add_filter('wpseo_robots', '__return_false');
 
 function custom_article_meta_tags() {
     if (is_singular('article')) {
