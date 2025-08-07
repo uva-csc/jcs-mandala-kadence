@@ -85,7 +85,7 @@ function custom_article_meta_tags() {
          * $pdf_url = get_post_meta($post->ID, 'citation_pdf_url', true);
          */
         // -- Open Graph --
-        echo "<meta property='og:title' content='" . esc_attr($title) . "' />\n";
+        echo "<meta property='og:title' content='" . esc_attr($title) . "' data-label='csc-custom' />\n";
         echo "<meta property='og:description' content='" . esc_attr($abstract) . "' />\n";
         echo "<meta property='og:type' content='article' />\n";
         echo "<meta property='og:url' content='" . esc_url($url) . "' />\n";
@@ -176,6 +176,9 @@ function custom_article_meta_tags() {
 
         echo "<script type='application/ld+json'>" . json_encode($jsonld, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "</script>\n";
 
+    } else {
+        $post_type = get_post_type();
+        echo "<meta property='post_type' content='" . esc_attr($post_type) . "' data-label='csc-custom' />\n";
     }
 }
 add_action('wp_head', 'custom_article_meta_tags');
