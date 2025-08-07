@@ -41,7 +41,7 @@ add_shortcode( 'issues-list', 'create_shortcode_issues_post_type' );
 // Metatags for indexing
 
 // Disable Yoast meta tags and structured data
-add_action('init', function() {
+add_action('template_redirect', function() {
     if (class_exists('WPSEO_Frontend')) {
         remove_action('wp_head', [WPSEO_Frontend::get_instance(), 'head'], 1);
     }
