@@ -44,12 +44,6 @@ add_shortcode( 'issues-list', 'create_shortcode_issues_post_type' );
 add_action('wp', function() {
     if (class_exists('WPSEO_Frontend')) {
         remove_action('wp_head', [WPSEO_Frontend::get_instance(), 'head'], 1);
-        // Remove Open Graph tags
-        remove_action('wpseo_opengraph', [WPSEO_OpenGraph::get_instance(), 'opengraph'], 30);
-
-        // Remove Twitter Card tags
-        remove_action('wpseo_twitter', [WPSEO_Twitter::get_instance(), 'twitter'], 40);
-
     }
 }, 99);
 
