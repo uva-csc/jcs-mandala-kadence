@@ -40,31 +40,6 @@ add_shortcode( 'issues-list', 'create_shortcode_issues_post_type' );
 
 // Metatags for indexing
 
-// Disable Yoast meta tags and structured data
-add_action('wp', function() {
-    // Remove Yoast's main head output (meta description, canonical, robots, etc.)
-    if (class_exists('WPSEO_Frontend')) {
-        remove_action('wp_head', [WPSEO_Frontend::get_instance(), 'head'], 1);
-    }
-
-    // Remove Open Graph meta tags
-    if (class_exists('WPSEO_OpenGraph')) {
-        remove_action('wpseo_opengraph', [WPSEO_OpenGraph::get_instance(), 'opengraph'], 30);
-    }
-
-    // Remove Twitter card meta tags
-    if (class_exists('WPSEO_Twitter')) {
-        remove_action('wpseo_twitter', [WPSEO_Twitter::get_instance(), 'twitter'], 40);
-    }
-}, 99);
-
-add_filter('wpseo_json_ld_output', '__return_false');
-add_filter('wpseo_opengraph', '__return_false');
-add_filter('wpseo_twitter', '__return_false');
-add_filter('wpseo_metadesc', '__return_false');
-add_filter('wpseo_canonical', '__return_false');
-add_filter('wpseo_robots', '__return_false');
-
 function custom_article_meta_tags() {
     if (is_singular('article')) {
         global $post;
@@ -209,13 +184,3 @@ function custom_article_meta_tags() {
     }
 }
 add_action('wp_head', 'custom_article_meta_tags');
-
-/*
-function custom_meta_tags_test() {
-    error_log("************ HERE ************");
-    $msg = is_singular('article') ? "This is an Article!!!": "NOT AN ARTICLE";
-    echo "<meta property='og:title' content='My Custom meta og title! $msg' />\n";
-}
-
-add_action('wp_head', 'custom_meta_tags_test');
-*/
