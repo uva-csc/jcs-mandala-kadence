@@ -41,10 +41,13 @@ add_shortcode( 'issues-list', 'create_shortcode_issues_post_type' );
 // Metatags for indexing
 
 // Disable Yoast meta tags and structured data
-add_filter('wpseo_json_ld_output', function() { return false; });
-add_filter('wpseo_opengraph',  function() { return false; });
-add_filter('wpseo_twitter',  function() { return false; });
-add_filter('wpseo_metadesc',  function() { return false; });
+add_action('init', function() {
+    if (class_exists('WPSEO_Frontend')) {
+        remove_action('wp_head', [WPSEO_Frontend::get_instance(), 'head'], 1);
+    }
+});
+
+add_filter('wpseo_json_ld_output', '__return_false');
 
 function custom_article_meta_tags() {
     if (is_singular('article')) {
