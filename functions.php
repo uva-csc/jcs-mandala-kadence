@@ -41,10 +41,10 @@ add_shortcode( 'issues-list', 'create_shortcode_issues_post_type' );
 // Metatags for indexing
 
 // Disable Yoast meta tags and structured data
-add_filter('wpseo_json_ld_output', '__return_false');
-add_filter('wpseo_opengraph', '__return_false');
-add_filter('wpseo_twitter', '__return_false');
-add_filter('wpseo_metadesc', '__return_false');
+add_filter('wpseo_json_ld_output', function() { return false; });
+add_filter('wpseo_opengraph',  function() { return false; });
+add_filter('wpseo_twitter',  function() { return false; });
+add_filter('wpseo_metadesc',  function() { return false; });
 
 function custom_article_meta_tags() {
     if (is_singular('article')) {
