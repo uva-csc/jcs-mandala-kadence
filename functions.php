@@ -41,11 +41,11 @@ add_shortcode( 'issues-list', 'create_shortcode_issues_post_type' );
 // Metatags for indexing
 
 // Disable Yoast meta tags and structured data
-add_action('template_redirect', function() {
+add_action('wp', function() {
     if (class_exists('WPSEO_Frontend')) {
         remove_action('wp_head', [WPSEO_Frontend::get_instance(), 'head'], 1);
     }
-});
+}, 99);
 
 add_filter('wpseo_json_ld_output', '__return_false');
 
@@ -95,6 +95,7 @@ function custom_article_meta_tags() {
          * $pdf_url = get_post_meta($post->ID, 'citation_pdf_url', true);
          */
         // -- Open Graph --
+        echo "<meta name='description' content='" . esc_attr($abstract) . "' />\n";
         echo "<meta property='og:title' content='" . esc_attr($title) . "' data-label='csc-custom' />\n";
         echo "<meta property='og:description' content='" . esc_attr($abstract) . "' />\n";
         echo "<meta property='og:type' content='article' />\n";
