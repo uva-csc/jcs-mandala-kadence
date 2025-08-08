@@ -89,7 +89,7 @@ class MandalaKadence {
 
 	function __construct() {
 		// Custom Actions
-		add_action('after_setup_theme', array($this, 'init'));
+		add_action('wp_enqueue_scripts', array($this, 'init'));
         add_action('wp_head', array($this, 'mandala_update_header'));
         add_action('kadence_top_header', array($this, 'subsite_back_link'));
 		add_action('kadence_header', array($this, 'add_custom_data'));
