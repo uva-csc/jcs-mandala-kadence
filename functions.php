@@ -41,6 +41,7 @@ add_shortcode( 'issues-list', 'create_shortcode_issues_post_type' );
 // Metatags for indexing
 
 function custom_article_meta_tags() {
+    $post_type = get_post_type();
     if (is_singular('article')) {
         global $post;
 
@@ -71,6 +72,18 @@ function custom_article_meta_tags() {
             $image = get_the_post_thumbnail_url($issue_id, 'full');
         }
         $url = get_permalink($post);
+        // Code for extracting PDF url
+        $pdf_post_id = get_field('pdf');
+        $content = get_post_field('post_content', $pdf_post_id);
+        // Parse blocks
+        $blocks = parse_blocks($content);
+        $pdf_url = '';
+        foreach ($blocks as $block) {
+            if ($block['blockName'] === 'core/file' && !empty($block['attrs']['href'])) {
+                $pdf_url = $block['attrs']['href'];
+                break; // stop after first file found
+            }
+        }
 
         /** Chat GPT initial suggestion
          * $title = get_the_title($post);
@@ -121,6 +134,10 @@ function custom_article_meta_tags() {
         echo "<meta name='citation_publication_date' content='" . esc_attr($year) . "' />\n";
         echo "<meta name='citation_doi' content='" . esc_attr($doi) . "' />\n";
         echo "<meta name='citation_publication_date' content='" . esc_attr($date_scholar) . "' />\n";
+        if (!empty($pdf_url)) {
+            echo "<meta name='citation_pdf' content='" . esc_attr($pdf_url) . "' />\n";
+            echo '<meta property="pdf:url" content="' . esc_url($pdf_url) . '">';
+        }
 
         // if ($pdf_url) echo "<meta name='citation_pdf_url' content='" . esc_url($pdf_url) . "' />\n";
 
@@ -178,9 +195,10 @@ function custom_article_meta_tags() {
 
         echo "<script type='application/ld+json'>" . json_encode($jsonld, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . "</script>\n";
 
+    } elseif (is_singular('page')) {
+        echo "<meta property='post_type' content='Need to add meta tags for pages' data-label='csc-custom' />\n";
     } else {
-        $post_type = get_post_type();
-        echo "<meta property='post_type' content='" . esc_attr($post_type) . "' data-label='csc-custom' />\n";
+        echo "<meta property='post_type' content='Need to add meta tags for pages for other type: " . esc_attr($post_type) . "' data-label='csc-custom' />\n";
     }
 }
 add_action('wp_head', 'custom_article_meta_tags');
