@@ -47,6 +47,7 @@ function get_mandala_site_url($asset_type='texts') {
 }
 
 function get_solr_record($uid) {
+    if (_is_dev_site()) { return null; } // Disabling SOLR call for mandala data on dev sites (dev & staging)
     $solr_url = _is_dev_site() ?
         'https://mandala-index-dev.internal.lib.virginia.edu/solr/kmassets/select' :
         'https://mandala-index.internal.lib.virginia.edu/solr/kmassets/select';
