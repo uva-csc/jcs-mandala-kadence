@@ -472,12 +472,14 @@ class MandalaKadence {
 		$val = get_post_meta($pid, $varname, true);
 		if (empty($val)) {
 			$thepost = get_post($pid);
-			if (!empty($thepost->post_parent)) {
-				$val = $this->get_ancestor_value($thepost->post_parent, $varname);
-			} elseif ($thepost->post_type == 'post') {
-                $blog_home_id = get_option( 'blog_homepage' );
-                if (!empty($blog_home_id)) {
-                    $val = $this->get_ancestor_value($blog_home_id, $varname);
+            if (!empty($thepost)) {
+                if (!empty($thepost->post_parent)) {
+                    $val = $this->get_ancestor_value($thepost->post_parent, $varname);
+                } elseif ($thepost->post_type == 'post') {
+                    $blog_home_id = get_option('blog_homepage');
+                    if (!empty($blog_home_id)) {
+                        $val = $this->get_ancestor_value($blog_home_id, $varname);
+                    }
                 }
             }
 		}
