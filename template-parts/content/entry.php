@@ -42,7 +42,7 @@ namespace Kadence;
 
         <!-- Special Issue Collection Link -->
         <?php if(get_field('collection_link')) {
-            echo '<p class="special-issues-link"><a href="' . get_field('collection_link') . '">Read the issue.</a></p>';
+            echo '<p class="special-issues-link"><a href="' . get_permalink() . '">Read the issue.</a></p>';
         } ?>
 
     </div>

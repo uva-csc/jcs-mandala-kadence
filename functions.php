@@ -58,6 +58,14 @@ function custom_article_meta_tags() {
                 $authors[] = get_the_title($author);
             }
         }
+
+		//$keyworddata = get_field('keywords');
+		//$keywords = [];
+		//foreach ($keyworddata as $keyword){
+		//	if ($keyword) {
+		//		$keywords[] = $keyword->name;
+		//	}
+		//}
         $issue_id = get_field('special_issue');
         $issue = get_field('issue_number', $issue_id);
         $year = get_field('dates');
@@ -127,6 +135,7 @@ function custom_article_meta_tags() {
         foreach ($authors as $author) {
             echo "<meta name='citation_author' content='" . esc_attr($author) . "' />\n";
         }
+       // echo "<meta name='citation_keywords' content='" . implode(";",esc_attr($keywords)) . "' />\n";
         echo "<meta name='citation_journal_title' content='Journal of Contemplative Studies' />\n";
         echo "<meta name='citation_issue' content='" . esc_attr($issue) . "' />\n";
         echo "<meta name='citation_firstpage' content='" . esc_attr($pages['start_page']) . "' />\n";
@@ -135,7 +144,8 @@ function custom_article_meta_tags() {
         echo "<meta name='citation_doi' content='" . esc_attr($doi) . "' />\n";
         echo "<meta name='citation_publication_date' content='" . esc_attr($date_scholar) . "' />\n";
         if (!empty($pdf_url)) {
-            echo "<meta name='citation_pdf' content='" . esc_attr($pdf_url) . "' />\n";
+		// revised from citation_pdf
+            echo "<meta name='citation_pdf_url' content='" . esc_attr($pdf_url) . "' />\n";
             echo '<meta property="pdf:url" content="' . esc_url($pdf_url) . '">';
         }
 

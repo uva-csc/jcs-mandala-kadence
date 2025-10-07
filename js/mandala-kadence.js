@@ -9,9 +9,8 @@
         MainMenuUpdates();
         // $(window).on("resize", mandalaWindowResize);
         // Otherwise, add event listener for hash changes
-        window.addEventListener("hashchange", HashMenuActiveLink, false);
+        //window.addEventListener("hashchange", HashMenuActiveLink, false);
     });
-
 
     // Highlights the active link in a menu if it is a Mandala hash which loads content asynchronously
     const HashMenuActiveLink = () => {
